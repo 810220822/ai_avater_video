@@ -1,5 +1,6 @@
-<template>
-    <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen"
+<template >
+    <el-menu  default-active="1" 
+    class="el-menu-vertical-demo"  @open="handleOpen"
         @close="handleClose">
         <template v-for="menuItem in menuItems">
             <el-menu-item :index="menuItem.index" @click="clickMenu(menuItem.route, menuItem.special)">
@@ -17,11 +18,15 @@
         </template>
     </el-menu>
 </template> 
-<style> .el-menu-vertical-demo:not(.el-menu--collapse) {
+<style> 
+ 
+ .el-menu-vertical-demo {
      width: 200px;
-     min-height: 400px;
+     height: 100vh;
+     /* min-height: 400px; */
+     /* height:max-content; */
+   /* background-color: #FF8C00; */
  }
-
  .special-content {
   background: linear-gradient(to right, #FFD700, #FF8C00); /* 设置线性渐变的背景色 */
   -webkit-background-clip: text; 

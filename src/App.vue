@@ -1,15 +1,18 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-header  class="header">Header</el-header>
+      <el-header class="header">
+        <Header ></Header>
+      </el-header>
       <el-container>
-        <el-aside class="aside">
-          <common-aside />
+        <el-aside class="aside" style="background-color: white;">
+       
+          <CommonAside ></CommonAside>
         </el-aside>
-        <el-main> 
-          
+        <el-main>
+
           <router-view>
-              
+
           </router-view>
         </el-main>
       </el-container>
@@ -19,30 +22,43 @@
 <style>
 .common-layout {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: red;
+  border: 0px solid ;
+
 }
 
 .header {
-  background-color: lightblue;
+
+  width: 100vw;
+
+  margin: 0;
+  padding: 0;
+
 }
 
 .aside {
-  background-color: orange;
+  background-color: white;
   border: 0px;
   width: 200px;
-  flex: 0 0 200px; /* 固定左侧宽度为 200px */
+  
+ 
+
+}
+
+.el-main {
+  flex: 1;
+  /* 填充剩余空间 */
 }
 </style>
 <script>
 import CommonAside from './components/CommonAside.vue';
- 
+import Header from './components/Header.vue';
 export default {
-  name: 'App' ,
+  name: 'App',
   components: {
-    CommonAside
+    CommonAside, Header
   }
 }
 </script>
