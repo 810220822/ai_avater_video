@@ -1,8 +1,20 @@
 <template>
-    <el-menu  class="el-menu-demo" mode="horizontal" >
+    <el-menu class="el-menu-demo" mode="horizontal">
         <el-menu-item index="0">
-            <img style="width: 100px" src="/images/element-plus-logo.svg" alt="Element logo" />
+            <img style="width: 100px" src="../assets/title-logo.png" alt="生成易" />
         </el-menu-item>
+        <div class="right-items">
+
+            <el-menu-item index="1" style="float: right;color: white;">
+                <el-icon>
+                    <User />
+                </el-icon>
+                <span>用户</span>
+            </el-menu-item>
+            <el-menu-item index="2" style="float: right;color: white;" @click="logout">
+                退出登录
+            </el-menu-item>
+        </div>
 
     </el-menu>
 </template>
@@ -11,16 +23,24 @@
 .flex-grow {
     flex-grow: 1;
 }
-
+.right-items {
+  display: flex;
+  align-items: center;
+  color: white;
+}
 .el-menu-demo {
- 
+
     width: 100%;
-   
+    background-color: rgb(0, 143, 190);
+
+    height: 55px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .el-menu-demo .el-menu-item {
-  width: auto !important;
-  /* 取消菜单项的宽度限制 */
+    width: auto !important;
+    /* 取消菜单项的宽度限制 */
 }
 </style>
 <script >

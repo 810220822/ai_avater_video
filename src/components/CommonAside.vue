@@ -3,7 +3,7 @@
     class="el-menu-vertical-demo"  @open="handleOpen"
         @close="handleClose">
         <template v-for="menuItem in menuItems">
-            <el-menu-item :index="menuItem.index" @click="clickMenu(menuItem.route, menuItem.special)">
+            <el-menu-item :index="menuItem.index" @click="clickMenu(menuItem.route, menuItem.special,menuItem.title)">
                 <el-icon  :style="{'color': menuItem.special ? '#FFD700' : ''}"> 
                     <component :is="menuItem.icon" />
                 </el-icon>
@@ -25,7 +25,7 @@
      height: 100vh;
      /* min-height: 400px; */
      /* height:max-content; */
-   /* background-color: #FF8C00; */
+   background-color: rgb(247, 248, 250);
  }
  .special-content {
   background: linear-gradient(to right, #FFD700, #FF8C00); /* 设置线性渐变的背景色 */
@@ -51,7 +51,8 @@ export default {
             console.log(key, keyPath);
         },
         handleClose(key, keyPath) { console.log(key, keyPath); },
-        clickMenu(path, special) {
+
+        clickMenu(path, special,title) {
             if (special) {
                 // 执行特殊菜单项的逻辑，例如打开新页面
                 // window.open('https://www.baidu.com', '_blank');
@@ -60,6 +61,7 @@ export default {
             } else {
                 this.$router.push(path);
             }
+            this.$emit('handleMenuClick', path, title);
         }
     },
     components: {
@@ -83,25 +85,25 @@ export default {
                 },
                 {
                     index: "3",
-                    route: "/index",
+                    route: "/writer",
                     icon: "Notebook",
                     title: "创意写作"
                 },
                 {
                     index: "4",
-                    route: "/user",
+                    route: "/avater",
                     icon: "VideoCamera",
                     title: "Avater"
                 },
                 {
                     index: "5",
-                    route: "/index",
+                    route: "/voice",
                     icon: "Mic",
                     title: "声音克隆"
                 },
                 {
                     index: "6",
-                    route: "/user",
+                    route: "/writer",
                     icon: "Files",
                     title: "资源库"
                 },
