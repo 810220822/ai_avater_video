@@ -1,5 +1,9 @@
 <template>
-    创意写作
+
+<div style="width: 100%;">
+    <WriterComponents   ></WriterComponents>
+</div>
+   
 </template>
     
 <style>
@@ -8,13 +12,14 @@
 <script >
  
 import { ElIcon } from 'element-plus';
+import WriterComponents from '../components/WriterComponents.vue';
 export default {
     methods:
     {
         
     },
     components: {
-        ElIcon
+        ElIcon,WriterComponents
     },
 }
 </script>

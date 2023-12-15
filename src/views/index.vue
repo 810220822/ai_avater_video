@@ -105,6 +105,7 @@ import { ElIcon } from 'element-plus';
 import { VideoPlay, Picture, Microphone, Mic, Shop, Cpu, Folder, User, Search } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import { reactive } from "vue";
+import axios from 'axios'
 const inputtext = ref('');
 // const form2 = reactive({ name: "大是大非" });
 export default {

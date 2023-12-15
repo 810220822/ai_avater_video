@@ -22,3 +22,18 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+## 部署相关
+
+### npm 版本
+
+```
+nvm use 20.10.0   
+```
+
+### axios
+```
+npm install axios --save
+```
+
