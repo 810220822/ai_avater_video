@@ -93,7 +93,7 @@ export default {
         { index: '0', route: '/index', label: '首页' },
 
       ], // 初始为空数组
-      pageTitle: '对对对', // 初始为空字符串
+      pageTitle: '', // 初始为空字符串
       pageSubTitle: '', // 初始为空字符串
     };
   },
