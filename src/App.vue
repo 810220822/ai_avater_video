@@ -9,14 +9,16 @@
 
           <CommonAside @handleMenuClick="handleMenuClick"></CommonAside>
         </el-aside>
-        <div style="width: 100%;">
+        <div style="width: 100%;height: 100%;">
           <PageHeader class="pageHeader" :breadcrumb="breadcrumb" :title="pageTitle" :subTitle="pageSubTitle">
           </PageHeader>
 
+          
+            <router-view>
 
-          <router-view>
-
-          </router-view>
+</router-view>
+           
+         
 
 
         </div>
@@ -29,7 +31,7 @@
 <style>
 .common-layout {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   border: 0px solid;

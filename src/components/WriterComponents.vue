@@ -1,5 +1,5 @@
 <template>
-    <div class="grid-container">
+    <div class="grid-container" style="height: 100%;">
 
         <!-- 元素 1 -->
         <div class="grid-header">
@@ -29,7 +29,7 @@
                 <el-tab-pane label="草稿箱" name="草稿箱"></el-tab-pane>
             </el-tabs>
         </div>
-        <div>
+        <div style="height: 100%;">
                        
  <!--点击tabs的页签，要显示对应的自定义控件。和本控件同在components文件夹下，分别是NewsComponent.vue,SellComponent.vue,DramaComponent.vue,BoxComponent.vue -->
   <!-- 新闻热点控件 -->
@@ -42,9 +42,7 @@
     <BoxComponent v-if="activeName === '草稿箱'" />
            
         </div>
-        <div class="tab-content">
-           
-        </div>
+        
     </div>
 </template>
 <style>
@@ -57,6 +55,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 100%;
 
 }
 .div-tabs{

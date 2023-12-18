@@ -1,6 +1,6 @@
 
 <template>
-    <div class="container-child">
+    <div class="container-child" >
         <div class="list">
             <div class="icons">
 
@@ -17,37 +17,49 @@
 
                 </div>
             </div>
-            <div class="hot-list">
-                热榜
-                <div class="item" v-for="item in hotList" :key="item.id">
+            <div height="100%" style="flex:1;overflow-y: auto;">
+                <div class="hot-list">
+                <div class="model-title">
+                    热榜
+                </div>
+
+                <div class="news-item" v-for="item in hotList" :key="item.id">
                     <!-- 标题 -->
-                    <div class="title">{{ item.title }}</div>
+                    <div class="news-title">{{ item.id }}.{{ item.title }}</div>
                     <!-- 浏览量 -->
-                    <div class="views">浏览量: {{ item.views }}</div>
+                    <div class="news-views-count">{{ item.count }}</div>
                     <!-- 详细按钮 -->
-                    <button class="detail-button" @click="selectItem(item)">详细</button>
+                    <el-button  class="detail-button" @click="selectItem(item)" type="primary" link>分析</el-button >
                     <!-- 进入按钮 -->
-                    <button class="enter-button" @click="openLink(item.link)">进入</button>
+                    <el-icon class="enter-button" @click="openLink(item.link)"><ArrowRight /></el-icon>
                 </div>
             </div>
             <div class="history-list">
+                <div class="model-title">
+                    近期热榜
+                </div>
 
-                近期热榜
-                <div class="item" v-for="item in historyList" :key="item.id">
+                <div class="news-item" v-for="item in historyList" :key="item.id">
                     <!-- 标题 -->
-                    <div class="title">{{ item.title }}</div>
+                    <div class="news-title">{{ item.id }}.{{ item.title }}</div>
                     <!-- 浏览量 -->
-                    <div class="views">浏览量: {{ item.views }}</div>
+                    <div class="news-views-count"> {{ item.count }}</div>
                     <!-- 详细按钮 -->
-                    <button class="detail-button" @click="selectItem(item)">详细</button>
+                    <el-button  class="detail-button" @click="selectItem(item)" type="primary" link>分析</el-button >
                     <!-- 进入按钮 -->
-                    <button class="enter-button" @click="openLink(item.link)">进入</button>
+                    <el-icon class="enter-button" @click="openLink(item.link)"><ArrowRight /></el-icon>
+                    
                 </div>
             </div>
+            </div>
+            
         </div>
-        <div class="robot">
-            写作助手
-            <div class="chat-history">
+        <div class="robot" style="flex:0 0 auto;overflow-y: hidden;">
+            <div class="model-title">
+                写作助手
+            </div>
+            <div class="chat-robot" stretch>
+                <div class="chat-history">
                 <!-- 历史聊天记录 -->
                 <div v-for="message in chatHistory" :key="message.id" class="message">
                     {{ message.content }}
@@ -61,22 +73,56 @@
                 <!-- 清除按钮 -->
                 <button class="clear-button" @click="clearHistory">清除</button>
             </div>
+            </div>
+           
         </div>
     </div>
 </template>
 <style>
+.chat-robot{
+    background-color: rgb(247, 248, 250);
+    width: 100%;
+    height: 100%;
+}
+.news-item{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+   align-items: center; 
+
+    border-bottom: 1px solid rgb(247, 248, 250);
+    margin-top: 7px;
+    margin-bottom: 7px;
+ 
+}
+.model-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 13px;
+    margin-top: 7px;
+   
+}
+
+.news-title {
+    font-size: 15px;
+   
+    margin-left: 13px;
+    /* margin-top: 7px; */
+    width: 80%;
+}
+
 .icons {
     display: flex;
     flex-direction: row;
     margin-top: 10px;
     justify-content: center;
-  
+
 }
 
 .icon {
     /* 图标样式 */
     width: 130px;
-  
+
 }
 
 .icon-image {
@@ -124,7 +170,10 @@
 
 .robot {
     border-left: 1px solid rgb(247, 248, 250);
-    /* background-color: blue */
+    border-bottom: 1px solid rgb(247, 248, 250);
+    /* background-color: rgb(247, 248, 250) */
+    width: 30%;
+    height: 100%;
 }
 
 .history-list {}
@@ -140,6 +189,10 @@
 .container-child {
     display: flex;
     flex-direction: row;
+
+    width: 100%;
+    height: 100%;
+    /* background-color: aquamarine; */
 }
 
 
@@ -197,14 +250,38 @@ export default {
 
             ],
             hotList: [
-                { id: 1, title: '热榜1', views: 100, link: '热榜1的链接' },
-                { id: 2, title: '热榜2', views: 200, link: '热榜2的链接' },
-                { id: 3, title: '热榜3', views: 300, link: '热榜3的链接' }
+                { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
+                { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
+                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' }
             ],
             historyList: [
-                { id: 1, title: '近期热榜1', views: 1000, link: '近期热榜1的链接' },
-                { id: 2, title: '近期热榜2', views: 2000, link: '近期热榜2的链接' },
-                { id: 3, title: '近期热榜3', views: 3000, link: '近期热榜3的链接' }
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
+                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
             ],
             chatHistory: [
                 { id: 1, content: '历史聊天记录1' },
