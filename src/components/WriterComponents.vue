@@ -30,10 +30,17 @@
             </el-tabs>
         </div>
         <div>
-                       <router-view>
+                       
  <!--点击tabs的页签，要显示对应的自定义控件。和本控件同在components文件夹下，分别是NewsComponent.vue,SellComponent.vue,DramaComponent.vue,BoxComponent.vue -->
-
-            </router-view>
+  <!-- 新闻热点控件 -->
+  <NewsComponent v-if="activeName === '新闻热点'" />
+    <!-- 爆款热卖控件 -->
+    <SellComponent v-if="activeName === '爆款热卖'" />
+    <!-- 爆剧剧本控件 -->
+    <DramaComponent v-if="activeName === '爆剧剧本'" />
+    <!-- 草稿箱控件 -->
+    <BoxComponent v-if="activeName === '草稿箱'" />
+           
         </div>
         <div class="tab-content">
            
@@ -83,7 +90,7 @@
     justify-content: center;
     flex-grow: 1;
 
-    width: 50%;
+    width: 40%;
     margin: 0 auto
 }
 
@@ -145,7 +152,7 @@ export default {
         },
         handleClick(tab) {
             this.activeTab = tab.name;
-            this.$router.push('./BoxComponent');
+       
         },
     },
     components: {
