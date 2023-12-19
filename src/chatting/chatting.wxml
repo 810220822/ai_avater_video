@@ -1,0 +1,45 @@
+<view class="container">
+  <scroll-view scroll-y="true" scroll-top="{{scrollTop}}" style="height:{{height}}">
+    <view class="display">
+      <block wx:for="{{messages}}" wx:key="index">
+        <view class="message-item {{item.from}}">
+          <rich-text class="message-content" nodes="{{item.content}}">{{item.content}}</rich-text>
+        </view>
+      </block>
+
+      <view class="box" class="{{rotate ? 'rotate' : ''}}">{{rorateTxt}}</view>
+    </view>
+
+  </scroll-view>
+
+
+
+
+
+  <view class="input-box2">
+    <view class="input-items">
+      <view bindtap='onQuestion' data-question='想赚钱' class="link-btn"> <text>想赚钱</text>
+        <image class="icon-image" src="../../images/icon/xiayibu.png" mode="aspectFit"></image>
+      </view>
+
+      <view bindtap='onQuestion' data-question='想升职' class="link-btn"> <text>想升职</text>
+        <image class="icon-image" src="../../images/icon/xiayibu.png" mode="aspectFit"></image>
+      </view>
+    </view>
+    <view class="input-box">
+ 
+      <!-- <textarea bindblur="bindBlur" class="input2" type="text" placeholder="输入你的想法" value="{{inputValue}}" bindinput="onInput" bindconfirm="onSend" auto-focus="true" auto-height="true"  />
+     <view  >
+      <image class="send-btn" bindtap="onSend"  bindconfirm="onSend" src="../../images/icon/icon_sent.png"></image>   </view>-->
+      <input type="text" placeholder="输入想问的" bindinput="onInput"  value="{{inputValue}}"
+      class="input2" />  
+    <image class="send-btn" bindtap="onSend"  bindconfirm="onSend" src="../../images/icon/icon_sent.png"></image> 
+   
+      
+    </view>
+
+  </view>
+
+
+
+</view>

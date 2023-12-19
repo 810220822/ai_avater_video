@@ -1,24 +1,23 @@
 
 <template>
-    <div class="container-child" style="height:500px">
-        <div class="list">
+    <div class="container-child" style="height:80vh;">
+        <div class="list"> 
+            <div class="icons">
 
-            <div height="100%" style="flex:1;overflow-y: auto;">
-                <div class="icons">
+                <!-- 一排icon按钮 -->
+                <div class="icon" v-for="icon in icons" :key="icon.id">
 
-                    <!-- 一排icon按钮 -->
-                    <div class="icon" v-for="icon in icons" :key="icon.id">
+                    <!-- icon 图标 -->
+                    <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large">
 
-                        <!-- icon 图标 -->
-                        <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large">
+                        <img :src="getIconPath(icon.iconUrl)" alt="icon" class="icon-image" @click="updateData(icon)">
 
-                            <img :src="getIconPath(icon.iconUrl)" alt="icon" class="icon-image" @click="updateData(icon)">
+                        {{ icon.name }}
+                    </el-button>
 
-                            {{ icon.name }}
-                        </el-button>
-
-                    </div>
                 </div>
+            </div>
+            <el-scrollbar style="height: 100%;">
                 <div class="hot-list">
                     <div class="model-title">
                         热榜
@@ -56,28 +55,17 @@
 
                     </div>
                 </div>
-            </div>
+
+            </el-scrollbar>
+
 
         </div>
-        <div class="robot" style="flex:0 0 auto;overflow-y: hidden;">
+        <div class="robot" >
             <div class="model-title">
                 写作助手
             </div>
             <div class="chat-robot" stretch>
-                <div class="chat-history">
-                    <!-- 历史聊天记录 -->
-                    <div v-for="message in chatHistory" :key="message.id" class="message">
-                        {{ message.content }}
-                    </div>
-                </div>
-                <div class="input-box">
-                    <!-- 输入框 -->
-                    <input type="text" v-model="inputText" class="text-input">
-                    <!-- 发送按钮 -->
-                    <button class="send-button" @click="sendMessage">发送</button>
-                    <!-- 清除按钮 -->
-                    <button class="clear-button" @click="clearHistory">清除</button>
-                </div>
+                <ChatComponent />
             </div>
 
         </div>
@@ -89,7 +77,10 @@
     width: 100%;
     height: 100%;
 }
-
+.scroll-list{
+    height: 70vh;
+    overflow-y: auto;
+}
 .news-item {
     display: flex;
     flex-direction: row;
@@ -99,7 +90,7 @@
     border-bottom: 1px solid rgb(247, 248, 250);
     margin-top: 7px;
     margin-bottom: 7px;
-
+   
 }
 
 .model-title {
@@ -212,7 +203,7 @@
 </style>
 <script>
 import { Search } from '@element-plus/icons-vue';
-
+import ChatComponent from "./ChatComponent.vue";
 export default {
 
     mounted() {
@@ -244,7 +235,7 @@ export default {
     },
     components: {
 
-
+        ChatComponent
     },
     data() {
         return {
@@ -260,7 +251,13 @@ export default {
             hotList: [
                 { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
                 { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
-                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' }
+                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' }, { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
+                { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
+                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' }, { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
+                { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
+                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' }, { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
+                { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
+                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' },
             ],
             historyList: [
                 { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
@@ -289,7 +286,7 @@ export default {
                 { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
                 { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
                 { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
+                { id: 3, title: '近期热榜3的标题名称asfsadf', count: 3000, link: 'https://twitter.com/home' },
             ],
             chatHistory: [
                 { id: 1, content: '历史聊天记录1' },

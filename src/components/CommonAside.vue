@@ -1,46 +1,68 @@
 <template >
-    <el-menu  default-active="1" 
-    class="el-menu-vertical-demo"  @open="handleOpen"
-        @close="handleClose">
-        <template v-for="menuItem in menuItems">
-            <el-menu-item :index="menuItem.index" @click="clickMenu(menuItem.route, menuItem.special,menuItem.title)">
-                <el-icon  :style="{'color': menuItem.special ? '#FFD700' : ''}"> 
-                    <component :is="menuItem.icon" />
-                </el-icon>
-                <template #title>
-                    <transition name="special-animation" v-if="menuItem.special">
-                        <div class="special-content">{{ menuItem.title }}</div>
-                    </transition>
-                    <div v-else>{{ menuItem.title }}</div>
-                </template>
+    <div class="el-menu-div-demo">
 
-            </el-menu-item>
-        </template>
-    </el-menu>
+
+        <el-menu class="el-menu-vertical-demo" default-active="1" @open="handleOpen" @close="handleClose">
+
+            <template v-for="menuItem in menuItems">
+                <el-menu-item :index="menuItem.index" @click="clickMenu(menuItem.route, menuItem.special, menuItem.title)">
+                    <el-icon :style="{ 'color': menuItem.special ? '#FFD700' : '' }">
+                        <component :is="menuItem.icon" />
+                    </el-icon>
+                    <template #title>
+                        <transition name="special-animation" v-if="menuItem.special">
+                            <div class="special-content">{{ menuItem.title }}</div>
+                        </transition>
+                        <div v-else>{{ menuItem.title }}</div>
+                    </template>
+
+                </el-menu-item>
+            </template>
+        </el-menu>
+    </div>
 </template> 
-<style> 
- 
- .el-menu-vertical-demo {
-     width: 200px;
-     height: 100vh;
-     /* min-height: 400px; */
-     /* height:max-content; */
-   background-color: rgb(247, 248, 250);
- }
- .special-content {
-  background: linear-gradient(to right, #FFD700, #FF8C00); /* 设置线性渐变的背景色 */
-  -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent; /* 将文字颜色设为透明 */
-  font-weight: bold;
-  animation: color-animation 2s infinite; /* 添加动画效果，2s 无限循环 */
-}
-.special-icon{
-    color:  #e8d466; /* 设置与标题相同的线性渐变背景色 */
-  /*-webkit-background-clip: text;  将背景色应用于文字 */
-  -webkit-text-fill-color: transparent; /* 将文字颜色设为透明 */
+<style>
+.el-menu-vertical-demo {
+    background-color: rgb(247, 248, 250);
+    border: none
+        /* border-right: 2px solid rgb(220, 230, 232); */
 }
 
+.el-menu-div-demo {
+    width: 200px;
+    height: 100%;
+    /* min-height: 400px; */
+    /* height:max-content; */
+    background-color: rgb(247, 248, 250);
+    overflow-y: auto;
 
+    overflow-x: hidden;
+    position: fixed;
+    border-right: 1px solid rgb(220, 230, 232);
+}
+
+.el-menu-div-demo::-webkit-scrollbar {
+    display: none;
+}
+
+.special-content {
+    background: linear-gradient(to right, #FFD700, #FF8C00);
+    /* 设置线性渐变的背景色 */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* 将文字颜色设为透明 */
+    font-weight: bold;
+    animation: color-animation 2s infinite;
+    /* 添加动画效果，2s 无限循环 */
+}
+
+.special-icon {
+    color: #e8d466;
+    /* 设置与标题相同的线性渐变背景色 */
+    /*-webkit-background-clip: text;  将背景色应用于文字 */
+    -webkit-text-fill-color: transparent;
+    /* 将文字颜色设为透明 */
+}
 </style>
 <script>
 import { ElIcon } from 'element-plus';
@@ -52,7 +74,7 @@ export default {
         },
         handleClose(key, keyPath) { console.log(key, keyPath); },
 
-        clickMenu(path, special,title) {
+        clickMenu(path, special, title) {
             if (special) {
                 // 执行特殊菜单项的逻辑，例如打开新页面
                 // window.open('https://www.baidu.com', '_blank');
@@ -107,6 +129,142 @@ export default {
                     icon: "Files",
                     title: "资源库"
                 },
+                {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库dddddd"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库aaaaaa"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "资源库dddddd"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "库aaaaaa"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: "最后一个"
+                }
             ]
         };
     },

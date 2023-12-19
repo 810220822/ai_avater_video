@@ -1,31 +1,29 @@
 <template>
   <div class="common-layout">
-    <el-container>
-      <el-header class="header">
-        <Header></Header>
-      </el-header>
-      <el-container>
-        <el-aside class="aside" style="background-color: white;">
 
-          <CommonAside @handleMenuClick="handleMenuClick"></CommonAside>
-        </el-aside>
+    <div style="height: 5%;">
+      <Header class="header"></Header>
+    </div>
+
+
+    <div style="display: flex;flex-direction: row;padding-top: 55px;height: 100%;" >
+      <div class="aside" style="background-color: white;padding-top: 0px;height: 100%;">
+
+        <CommonAside @handleMenuClick="handleMenuClick"></CommonAside>
+      </div>
+      <div style="width: 100%;height: 100%;">
+        <PageHeader class="pageHeader" :breadcrumb="breadcrumb" :title="pageTitle" :subTitle="pageSubTitle">
+        </PageHeader>
+
         <div style="width: 100%;height: 100%;">
-          <PageHeader class="pageHeader" :breadcrumb="breadcrumb" :title="pageTitle" :subTitle="pageSubTitle">
-          </PageHeader>
+          <router-view>
 
-          
-            <router-view>
-
-</router-view>
-           
-         
-
-
+          </router-view>
         </div>
 
+      </div>
+    </div>
 
-      </el-container>
-    </el-container>
   </div>
 </template>
 <style>
@@ -36,6 +34,7 @@
   flex-direction: column;
   border: 0px solid;
 
+  overflow: hidden;
 }
 
 .pageHeader {
@@ -62,14 +61,15 @@
   height: 55px;
   margin: 0;
   padding: 0;
-
+  position: fixed;
+  z-index: 999;
 }
 
 .aside {
   background-color: white;
   border: 0px;
   width: 200px;
-
+  height: 100%;
 
 
 }

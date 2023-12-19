@@ -1,5 +1,5 @@
 <template>
-    <div class="grid-container" style="height:100%">
+    <div class="grid-container" style="height:100%;overflow: hidden;">
 
         <!-- 元素 1 -->
         <div class="grid-header">
@@ -29,20 +29,20 @@
                 <el-tab-pane label="草稿箱" name="草稿箱"></el-tab-pane>
             </el-tabs>
         </div>
-        <div style="height: 100%;">
-                       
- <!--点击tabs的页签，要显示对应的自定义控件。和本控件同在components文件夹下，分别是NewsComponent.vue,SellComponent.vue,DramaComponent.vue,BoxComponent.vue -->
-  <!-- 新闻热点控件 -->
-  <NewsComponent v-if="activeName === '新闻热点'" />
-    <!-- 爆款热卖控件 -->
-    <SellComponent v-if="activeName === '爆款热卖'" />
-    <!-- 爆剧剧本控件 -->
-    <DramaComponent v-if="activeName === '爆剧剧本'" />
-    <!-- 草稿箱控件 -->
-    <BoxComponent v-if="activeName === '草稿箱'" />
-           
+        <div style=" height: 100%">
+
+            <!--点击tabs的页签，要显示对应的自定义控件。和本控件同在components文件夹下，分别是NewsComponent.vue,SellComponent.vue,DramaComponent.vue,BoxComponent.vue -->
+            <!-- 新闻热点控件 -->
+            <NewsComponent v-if="activeName === '新闻热点'" />
+            <!-- 爆款热卖控件 -->
+            <SellComponent v-if="activeName === '爆款热卖'" />
+            <!-- 爆剧剧本控件 -->
+            <DramaComponent v-if="activeName === '爆剧剧本'" />
+            <!-- 草稿箱控件 -->
+            <BoxComponent v-if="activeName === '草稿箱'" />
+
         </div>
-        
+
     </div>
 </template>
 <style>
@@ -58,10 +58,12 @@
     height: 100%;
 
 }
-.div-tabs{
+
+.div-tabs {
     background-color: rgb(247, 248, 250);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 .grid-search {
     width: 60%;
     background-color: rgb(247, 248, 250);
@@ -120,9 +122,9 @@ import { Search } from '@element-plus/icons-vue';
 import { ref } from 'vue';
 
 import NewsComponent from "./NewsComponent.vue";
-import SellComponent from "./SellComponents.vue";
-import DramaComponent from "./DramaComponents.vue";
-import BoxComponent from "./BoxComponents.vue";
+import SellComponent from "./SellComponent.vue";
+import DramaComponent from "./DramaComponent.vue";
+import BoxComponent from "./BoxComponent.vue";
 
 
 const inputtext = ref('');
@@ -151,7 +153,7 @@ export default {
         },
         handleClick(tab) {
             this.activeTab = tab.name;
-       
+
         },
     },
     components: {
