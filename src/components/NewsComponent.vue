@@ -1,58 +1,63 @@
 
 <template>
-    <div class="container-child" >
+    <div class="container-child" style="height:500px">
         <div class="list">
-            <div class="icons">
 
-                <!-- 一排icon按钮 -->
-                <div class="icon" v-for="icon in icons" :key="icon.id">
-
-                    <!-- icon 图标 -->
-                    <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large">
-
-                        <img :src="getIconPath(icon.iconUrl)" alt="icon" class="icon-image" @click="updateData(icon)">
-
-                        {{ icon.name }}
-                    </el-button>
-
-                </div>
-            </div>
             <div height="100%" style="flex:1;overflow-y: auto;">
+                <div class="icons">
+
+                    <!-- 一排icon按钮 -->
+                    <div class="icon" v-for="icon in icons" :key="icon.id">
+
+                        <!-- icon 图标 -->
+                        <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large">
+
+                            <img :src="getIconPath(icon.iconUrl)" alt="icon" class="icon-image" @click="updateData(icon)">
+
+                            {{ icon.name }}
+                        </el-button>
+
+                    </div>
+                </div>
                 <div class="hot-list">
-                <div class="model-title">
-                    热榜
-                </div>
+                    <div class="model-title">
+                        热榜
+                    </div>
 
-                <div class="news-item" v-for="item in hotList" :key="item.id">
-                    <!-- 标题 -->
-                    <div class="news-title">{{ item.id }}.{{ item.title }}</div>
-                    <!-- 浏览量 -->
-                    <div class="news-views-count">{{ item.count }}</div>
-                    <!-- 详细按钮 -->
-                    <el-button  class="detail-button" @click="selectItem(item)" type="primary" link>分析</el-button >
-                    <!-- 进入按钮 -->
-                    <el-icon class="enter-button" @click="openLink(item.link)"><ArrowRight /></el-icon>
+                    <div class="news-item" v-for="item in hotList" :key="item.id">
+                        <!-- 标题 -->
+                        <div class="news-title">{{ item.id }}.{{ item.title }}</div>
+                        <!-- 浏览量 -->
+                        <div class="news-views-count">{{ item.count }}</div>
+                        <!-- 详细按钮 -->
+                        <el-button class="detail-button" @click="selectItem(item)" type="primary" link>分析</el-button>
+                        <!-- 进入按钮 -->
+                        <el-icon class="enter-button" @click="openLink(item.link)">
+                            <ArrowRight />
+                        </el-icon>
+                    </div>
                 </div>
-            </div>
-            <div class="history-list">
-                <div class="model-title">
-                    近期热榜
-                </div>
+                <div class="history-list">
+                    <div class="model-title">
+                        近期热榜
+                    </div>
 
-                <div class="news-item" v-for="item in historyList" :key="item.id">
-                    <!-- 标题 -->
-                    <div class="news-title">{{ item.id }}.{{ item.title }}</div>
-                    <!-- 浏览量 -->
-                    <div class="news-views-count"> {{ item.count }}</div>
-                    <!-- 详细按钮 -->
-                    <el-button  class="detail-button" @click="selectItem(item)" type="primary" link>分析</el-button >
-                    <!-- 进入按钮 -->
-                    <el-icon class="enter-button" @click="openLink(item.link)"><ArrowRight /></el-icon>
-                    
+                    <div class="news-item" v-for="item in historyList" :key="item.id">
+                        <!-- 标题 -->
+                        <div class="news-title">{{ item.id }}.{{ item.title }}</div>
+                        <!-- 浏览量 -->
+                        <div class="news-views-count"> {{ item.count }}</div>
+                        <!-- 详细按钮 -->
+                        <el-button class="detail-button" @click="selectItem(item)" type="primary" link>分析</el-button>
+                        <!-- 进入按钮 -->
+                        <el-icon class="enter-button" @click="openLink(item.link)">
+                            <ArrowRight />
+                        </el-icon>
+
+                    </div>
                 </div>
             </div>
-            </div>
-            
+
         </div>
         <div class="robot" style="flex:0 0 auto;overflow-y: hidden;">
             <div class="model-title">
@@ -60,52 +65,55 @@
             </div>
             <div class="chat-robot" stretch>
                 <div class="chat-history">
-                <!-- 历史聊天记录 -->
-                <div v-for="message in chatHistory" :key="message.id" class="message">
-                    {{ message.content }}
+                    <!-- 历史聊天记录 -->
+                    <div v-for="message in chatHistory" :key="message.id" class="message">
+                        {{ message.content }}
+                    </div>
+                </div>
+                <div class="input-box">
+                    <!-- 输入框 -->
+                    <input type="text" v-model="inputText" class="text-input">
+                    <!-- 发送按钮 -->
+                    <button class="send-button" @click="sendMessage">发送</button>
+                    <!-- 清除按钮 -->
+                    <button class="clear-button" @click="clearHistory">清除</button>
                 </div>
             </div>
-            <div class="input-box">
-                <!-- 输入框 -->
-                <input type="text" v-model="inputText" class="text-input">
-                <!-- 发送按钮 -->
-                <button class="send-button" @click="sendMessage">发送</button>
-                <!-- 清除按钮 -->
-                <button class="clear-button" @click="clearHistory">清除</button>
-            </div>
-            </div>
-           
+
         </div>
     </div>
 </template>
 <style>
-.chat-robot{
+.chat-robot {
     background-color: rgb(247, 248, 250);
     width: 100%;
     height: 100%;
 }
-.news-item{
+
+.news-item {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-   align-items: center; 
+    align-items: center;
 
     border-bottom: 1px solid rgb(247, 248, 250);
     margin-top: 7px;
     margin-bottom: 7px;
- 
+
 }
+
 .model-title {
     font-size: 15px;
     font-weight: bold;
     margin-left: 13px;
-    margin-top: 7px;
-   
+    margin-top: 15px;
+    margin-bottom: 15px;
+
 }
 
 .news-title {
     font-size: 15px;
-   
+
     margin-left: 13px;
     /* margin-top: 7px; */
     width: 80%;

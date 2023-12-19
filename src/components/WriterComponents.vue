@@ -1,5 +1,5 @@
 <template>
-    <div class="grid-container" style="height: 100%;">
+    <div class="grid-container" style="height:100%">
 
         <!-- 元素 1 -->
         <div class="grid-header">
