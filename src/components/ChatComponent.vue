@@ -1,13 +1,16 @@
 <template>
     <div class="container">
-      <el-scrollbar class="display" :view-style="{height: height}">
+      asfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaa|
+      sfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasf|
+      daasfdaasfdaasfda
+      <!-- <el-scrollbar class="display" :view-style="{height: height}">
         <div v-for="(item, index) in messages" :key="index" :class="['message-item', item.from]">
           <el-rich-text class="message-content" v-html="item.content"></el-rich-text>
         </div>
       </el-scrollbar>
-  
+   -->
       <div class="input-box2">
-        <div class="input-items">
+        <!-- <div class="input-items">
           <el-button @click="onQuestion('想赚钱')" class="link-btn">
             想赚钱
           
@@ -17,15 +20,16 @@
             想升职
             
           </el-button>
-        </div>
+        </div> -->
   
-        <div class="input-box">
+        <!-- <div class="input-box">
           <el-input v-model="inputValue" placeholder="输入想问的" class="input2"></el-input>
           <el-button @click="onQuestion('想升职')" class="link-btn">
            发送
              
           </el-button>
-        </div> 
+        </div>  -->
+        asdfsd
       </div>
     </div>
   </template>
@@ -61,15 +65,7 @@
   </script>
   
   <style >
-  .container{
-    background-color: aqua;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
- width: 100%;
-}
+
 .display{
   display: flex;
   flex-direction: column;
@@ -122,18 +118,32 @@
   box-sizing: border-box;
   overflow-y: auto;
 }
+.container{
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border:5px solid blue;
+  height: 100%;
+  width:100%;
+  padding-right: 120px;
+  padding-bottom: 120px;
+  margin-right: 120px;
+  margin-bottom: 120px;
+}
 .input-box2{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: left;
-  width: 100%;
+  /* align-items: left; */
+  width: 550px;
  
   box-sizing: border-box;
   /* padding: 10px; */
-  background-color: #fff;
-  position:fixed;
-  bottom: 1px;
+  background-color: #753333;
+  /* position:fixed; */
+  bottom: 0px;
  
 }
 .input-box {

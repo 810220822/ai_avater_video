@@ -19,7 +19,11 @@
                 </el-menu-item>
             </template>
         </el-menu>
+        <div  style="padding-bottom: 55px;">
+             
+        </div>
     </div>
+   
 </template> 
 <style>
 .el-menu-vertical-demo {
@@ -264,6 +268,11 @@ export default {
                     route: "/writer",
                     icon: "Files",
                     title: "最后一个"
+                }, {
+                    index: "6",
+                    route: "/writer",
+                    icon: "Files",
+                    title: ""
                 }
             ]
         };

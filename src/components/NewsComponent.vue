@@ -1,6 +1,6 @@
 
 <template>
-    <div class="container-child" style="height:80vh;">
+    <div class="container-child" style="height:100vh;">
         <div class="list"> 
             <div class="icons">
 
@@ -35,6 +35,9 @@
                             <ArrowRight />
                         </el-icon>
                     </div>
+                    <div class="model-tip">
+                        更新于：2023年12月20日 17:04:51
+                    </div>
                 </div>
                 <div class="history-list">
                     <div class="model-title">
@@ -54,17 +57,25 @@
                         </el-icon>
 
                     </div>
+                    <div class="model-tip">
+                        只展示最新 100 条榜单历史
+                    </div>
+                    <div style="height: 20px;">
+                        
+                    </div>
                 </div>
 
             </el-scrollbar>
-
+            <div style="height: 150px;">
+                        
+                    </div>
 
         </div>
         <div class="robot" >
             <div class="model-title">
                 写作助手
             </div>
-            <div class="chat-robot" stretch>
+            <div class="chat-robot" >
                 <ChatComponent />
             </div>
 
@@ -72,11 +83,7 @@
     </div>
 </template>
 <style>
-.chat-robot {
-    background-color: rgb(247, 248, 250);
-    width: 100%;
-    height: 100%;
-}
+
 .scroll-list{
     height: 70vh;
     overflow-y: auto;
@@ -92,7 +99,14 @@
     margin-bottom: 7px;
    
 }
-
+.model-tip{
+    font-size: 11px;
+    /* font-weight: bold; */
+    margin-left: 13px;
+    color: rgb(76, 76, 77);
+    margin-top: 2px;
+    margin-bottom: 45px;
+}
 .model-title {
     font-size: 15px;
     font-weight: bold;
@@ -166,12 +180,17 @@
 .clear-button {
     /* 清除按钮样式 */
 }
-
+.chat-robot {
+    background-color: rgb(247, 248, 250);
+   
+    height: 100%;
+    width: 50%;
+}
 .robot {
     border-left: 1px solid rgb(247, 248, 250);
     border-bottom: 1px solid rgb(247, 248, 250);
     /* background-color: rgb(247, 248, 250) */
-    width: 30%;
+    width: 35%;
     height: 100%;
 }
 
@@ -182,7 +201,7 @@
 .list {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 65%;
 }
 
 .container-child {

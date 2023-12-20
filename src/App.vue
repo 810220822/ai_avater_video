@@ -3,6 +3,7 @@
 
     <div style="height: 5%;">
       <Header class="header"></Header>
+      
     </div>
 
 
@@ -10,6 +11,7 @@
       <div class="aside" style="background-color: white;padding-top: 0px;height: 100%;">
 
         <CommonAside @handleMenuClick="handleMenuClick"></CommonAside>
+         
       </div>
       <div style="width: 100%;height: 100%;">
         <PageHeader class="pageHeader" :breadcrumb="breadcrumb" :title="pageTitle" :subTitle="pageSubTitle">
