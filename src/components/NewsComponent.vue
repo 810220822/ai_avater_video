@@ -177,8 +177,8 @@
     /* 发送按钮样式 */
 }
 
-.clear-button {
-    /* 清除按钮样式 */
+.clear-button { 
+    /* 清除按钮样的式 */
 }
 .chat-robot {
     background-color: rgb(247, 248, 250);
