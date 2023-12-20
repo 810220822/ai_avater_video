@@ -1,6 +1,6 @@
 
 <template>
-    <div class="container-child" style="height:100vh;">
+    <div class="container-child"  >
         <div class="list"> 
             <div class="icons">
 
@@ -78,8 +78,9 @@
             <div class="chat-robot" >
                 <ChatComponent />
             </div>
-
+          
         </div>
+
     </div>
 </template>
 <style>
@@ -113,6 +114,7 @@
     margin-left: 13px;
     margin-top: 15px;
     margin-bottom: 15px;
+    height: 20px;
 
 }
 
@@ -182,16 +184,33 @@
 }
 .chat-robot {
     background-color: rgb(247, 248, 250);
-   
+    border-bottom: 1px solid red;
+    
     height: 100%;
-    width: 50%;
+    width: 98%;
+
+    display: flex;
+    justify-content: center;
+
 }
 .robot {
-    border-left: 1px solid rgb(247, 248, 250);
-    border-bottom: 1px solid rgb(247, 248, 250);
-    /* background-color: rgb(247, 248, 250) */
+    border: 5px solid green;
+  
     width: 35%;
     height: 100%;
+    overflow-y: auto;
+}
+
+
+
+.container-child {
+    display: flex;
+    flex-direction: row;
+
+    width: calc(100vw-200px);
+    height: 100vh;
+    
+    /* background-color: aquamarine; */
 }
 
 .history-list {}
@@ -203,17 +222,6 @@
     flex-direction: column;
     width: 65%;
 }
-
-.container-child {
-    display: flex;
-    flex-direction: row;
-
-    width: 100%;
-    height: 100%;
-    /* background-color: aquamarine; */
-}
-
-
 
 .container {
     display: flex;

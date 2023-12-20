@@ -1,4 +1,7 @@
 <template>
+    <el-scrollbar style="height: 100%;">
+    
+    
     <div class="container">
       asfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaa|
       sfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasfdaasf|
@@ -32,6 +35,7 @@
         asdfsd
       </div>
     </div>
+  </el-scrollbar>
   </template>
   
   <script>
@@ -127,23 +131,22 @@
   border:5px solid blue;
   height: 100%;
   width:100%;
-  padding-right: 120px;
-  padding-bottom: 120px;
-  margin-right: 120px;
-  margin-bottom: 120px;
+  
+  overflow-y: auto;
+ 
 }
 .input-box2{
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* align-items: left; */
-  width: 550px;
+  /* width: 550px; */
  
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   /* padding: 10px; */
   background-color: #753333;
   /* position:fixed; */
-  bottom: 0px;
+  /* bottom: 0px; */
  
 }
 .input-box {
