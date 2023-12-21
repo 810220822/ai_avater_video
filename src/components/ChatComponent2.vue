@@ -98,6 +98,7 @@ export default {
   padding: 10px;
   background-color: #acacac;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.2);
+  position: fixed;
 }
 
 .input-area input {

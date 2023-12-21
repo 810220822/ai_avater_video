@@ -66,7 +66,7 @@
                 </div>
 
             </el-scrollbar>
-            <div style="height: 150px;">
+            <div style="height: 180px;">
 
 
             </div>
@@ -80,7 +80,7 @@
                 <ChatComponent />
                 
             </div>
-            <div style="height: 220px;">
+            <div style="height: 250px;">
 
 
             </div>
@@ -104,10 +104,10 @@
     flex-direction: column;
 
 
-
-    width: 35%;
+ position: relative;
+    width: 420px;
     height: 100%;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 
 
 
