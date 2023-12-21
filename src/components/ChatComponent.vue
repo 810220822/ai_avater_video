@@ -59,7 +59,7 @@ export default {
   data() {
     return {
       messages: [],
-      inputValue: '',
+      inputValue: 'a',
       height: '100%'
     };
   },
