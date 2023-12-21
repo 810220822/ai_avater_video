@@ -1,7 +1,7 @@
 <template>
   <div class="common-layout">
 
-    <div style="height: 5%;">
+    <div>
       <Header class="header"></Header>
       
     </div>
@@ -34,17 +34,19 @@
   width: 100%;
   height: 100%;
   display: flex;
+  flex:1;
   flex-direction: column;
-  border: 0px solid;
+  /* border: 1px solid red; */
 
-  overflow: hidden;
+  margin: 0 auto;
+  /* overflow: hidden; */
 }
 
 .pageHeader {
   display: flex;
   /* flex-direction: column; */
-  align-items: stretch;
-
+  
+  
   background-color: #f5f5f5;
   height: 25px;
   margin-top: 0;
@@ -52,9 +54,10 @@
   display: flex;
   align-items: center;
 
+  top: 55px;
   width: 100%;
   height: 35px;
-  background-color: red;
+ 
 
 }
 

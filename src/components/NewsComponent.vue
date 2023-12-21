@@ -1,7 +1,7 @@
 
 <template>
-    <div class="container-child"  >
-        <div class="list"> 
+    <div class="container-child">
+        <div class="list">
             <div class="icons">
 
                 <!-- 一排icon按钮 -->
@@ -60,35 +60,81 @@
                     <div class="model-tip">
                         只展示最新 100 条榜单历史
                     </div>
-                    <div style="height: 20px;">
-                        
+                    <div style="height: 1px;">
+
                     </div>
                 </div>
 
             </el-scrollbar>
             <div style="height: 150px;">
-                        
-                    </div>
+
+
+            </div>
 
         </div>
-        <div class="robot" >
+        <div class="robot">
             <div class="model-title">
                 写作助手
             </div>
-            <div class="chat-robot" >
+            <div class="chat-robot">
                 <ChatComponent />
+                
             </div>
-          
-        </div>
+            <div style="height: 220px;">
 
+
+            </div>
+        </div>
     </div>
 </template>
 <style>
+.chat-robot {
+ 
 
-.scroll-list{
+   
+
+    width: 100%;
+    height: 100%;
+ 
+}
+
+.robot {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+
+
+
+    width: 35%;
+    height: 100%;
+    overflow-y: auto;
+
+
+
+}
+
+.container-child {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+
+    width: calc(100vw-200px);
+    height: 100vh;
+
+}
+
+.list {
+    display: flex;
+    flex: 2;
+    flex-direction: column;
+    width: 65%;
+}
+
+.scroll-list {
     height: 70vh;
     overflow-y: auto;
 }
+
 .news-item {
     display: flex;
     flex-direction: row;
@@ -98,16 +144,19 @@
     border-bottom: 1px solid rgb(247, 248, 250);
     margin-top: 7px;
     margin-bottom: 7px;
-   
+
 }
-.model-tip{
+
+.model-tip {
     font-size: 11px;
     /* font-weight: bold; */
     margin-left: 13px;
     color: rgb(76, 76, 77);
     margin-top: 2px;
     margin-bottom: 45px;
+    top: 0px;
 }
+
 .model-title {
     font-size: 15px;
     font-weight: bold;
@@ -179,54 +228,14 @@
     /* 发送按钮样式 */
 }
 
-.clear-button { 
+.clear-button {
     /* 清除按钮样的式 */
 }
-.chat-robot {
-    background-color: rgb(247, 248, 250);
-    border-bottom: 1px solid red;
-    
-    height: 100%;
-    width: 98%;
 
-    display: flex;
-    justify-content: center;
-
-}
-.robot {
-    border: 5px solid green;
-  
-    width: 35%;
-    height: 100%;
-    overflow-y: auto;
-}
-
-
-
-.container-child {
-    display: flex;
-    flex-direction: row;
-
-    width: calc(100vw-200px);
-    height: 100vh;
-    
-    /* background-color: aquamarine; */
-}
 
 .history-list {}
 
 .hot-list {}
-
-.list {
-    display: flex;
-    flex-direction: column;
-    width: 65%;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-}
 </style>
 <script>
 import { Search } from '@element-plus/icons-vue';

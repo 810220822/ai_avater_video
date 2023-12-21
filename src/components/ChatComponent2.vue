@@ -12,6 +12,7 @@
             <button @click="sendMessage">发送</button>
         </div>
     </div>
+ 
 </template>
                         
 <script>

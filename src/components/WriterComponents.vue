@@ -5,7 +5,7 @@
         <div class="grid-header">
 
 
-            <el-row class="grid-search" justify="center">
+            <div class="grid-search" justify="center">
 
                 <el-input v-model="inputtext" placeholder="输入查询内容..." class="input-with-select">
 
@@ -16,9 +16,7 @@
                     </template>
                 </el-input>
 
-            </el-row>
-
-
+            </div> 
 
         </div>
         <div class="div-tabs">
@@ -47,31 +45,40 @@
 </template>
 <style>
 .div-components{
-    height: calc(100vh-55px-25px-38px-45px);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
-.tab-content {
-    margin-top: 16px;
-}
-
+ 
 .grid-container {
     /* padding-left: 15px;padding-right: 15px; */
     display: flex;
     flex-direction: column;
+    flex: 1;
     width: 100%;
-    height: calc(100vh-55px-25px);
-     
+ 
     overflow: hidden;
+ 
 }
 
 .div-tabs {
     background-color: rgb(247, 248, 250);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     height: 45px;
+
+
+    display: flex;
+    flex-direction: column;
+ 
 }
 
 .grid-search {
     width: 60%;
     background-color: rgb(247, 248, 250);
+
+    display: flex;
+    flex-direction: column;
+ 
 }
 
 .grid-header {
@@ -95,7 +102,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-grow: 1;
+    flex: 1;
 
     width: 40%;
     margin: 0 auto
