@@ -1,4 +1,4 @@
-<template >
+<template style="height=100%">
     <div class="el-menu-div-demo">
 
 
@@ -19,9 +19,7 @@
                 </el-menu-item>
             </template>
         </el-menu>
-        <div  style="padding-bottom: 55px;">
-             
-        </div>
+       
     </div>
    
 </template> 
@@ -33,16 +31,21 @@
 }
 
 .el-menu-div-demo {
-    width: 200px;
+    width: 230px;
     height: 100%;
     /* min-height: 400px; */
     /* height:max-content; */
+    min-height: 0; 
     background-color: rgb(247, 248, 250);
     overflow-y: auto;
 
     overflow-x: hidden;
-    position: fixed;
-    border-right: 1px solid rgb(220, 230, 232);
+ 
+    
+
+   
+    position: absolute; /* 修改为 absolute */
+    
 }
 
 .el-menu-div-demo::-webkit-scrollbar {
@@ -268,11 +271,6 @@ export default {
                     route: "/writer",
                     icon: "Files",
                     title: "最后一个"
-                }, {
-                    index: "6",
-                    route: "/writer",
-                    icon: "Files",
-                    title: ""
                 }
             ]
         };

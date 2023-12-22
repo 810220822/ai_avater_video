@@ -3,41 +3,29 @@
 
 
     <div class="display" ref="messagesContainer">
-
-
       <div v-for="(item, index) in messages" :key="index" class="message-item"
         :class="{ 'sent': item.sent, 'received': !item.sent }">
         {{ item.content }}
       </div>
-      <div class="box" :class="{ 'rotate': rotate }">
-        <span v-if="rorateTxt === '|' && rotate" class="loading-icon">{{ rorateTxt }}</span>
-        <span v-else-if="rorateTxt !== '' || rotate">{{ rorateTxt }}</span>
-      </div>
-      <div  >
-        <el-button @click="onQuestion('写剧本')" class="link-btn">
-          写剧本
-        </el-button>  
-      </div>
-    </div>
-    <div style="height: 290px;" />
-
-    <div class="input-box2">
-
-      <div class="input-items">
-
-        <!-- <el-button @click="onQuestion('写剧本')" class="link-btn">
-          写剧本
-        </el-button>  -->
-      </div>
-
-      <div class="input-box">
-        <el-input v-model="inputValue" placeholder="输入想问的" class="input2"></el-input>
-        <el-button @click="onSend()" class="link-btn">
-          发送
-
+    
+        <div class="link-btn-row" v-if="rorateTxt === '' && !rotate">
+        <el-button v-for="button in buttonList" :key="button" @click="onQuestion(button)" class="link-btn" >
+          {{ button }}
         </el-button>
       </div>
+ 
+     
+      <div class="chat-rotate-box" :class="{ 'rotate': rotate }">
+        <span v-if="rorateTxt === '|' && rotate" class="loading-icon">{{ rorateTxt }}</span>
+        <!-- <span v-else-if="rorateTxt !== '' || rotate">{{ rorateTxt }}</span> -->
+      </div>
+    </div>
 
+    <div class="input-box">
+      <el-input v-model="inputValue" placeholder="输入想问的" class="input-text"></el-input>
+      <el-button @click="onSend()" class="input-btn" type="primary">
+        发送
+      </el-button>
     </div>
 
   </div>
@@ -46,7 +34,7 @@
 <script>
 import { ref } from 'vue';
 import { ElScrollbar, ElButton, ElImage, ElInput } from 'element-plus';
-import { fetchData,backendURL,delayedString } from '@/utils/api.js';
+import { fetchData, backendURL, delayedString } from '@/utils/api.js';
 
 const intervalId = null;
 
@@ -73,7 +61,8 @@ export default {
       }
       ],
       inputValue: '',
-
+       
+      buttonList: ['写剧本','写剧本'], // 按钮列表的数据
     };
   },
   methods: {
@@ -82,27 +71,28 @@ export default {
       if (rorate == true) {
 
         this.rorateTxt = "|";
-        this.rotate = true
-
+        this.rotate = true;
+         
       } else {
         this.rorateTxt = "";
-        this.rotate = false
+        this.rotate = false;
+       
       }
     },
     chattingResponds() {
- 
+
       // console.log(that.data.messages)
       // 在小程序中发起网络请求
       // wx.request({
       //   url: flaskUrl + '/Chatting',
-        
+
       //   method: 'POST',
-       
+
       //   data: {
       //     result: that.data.messages
       //   },
       //   success: function (res) {
-          
+
       //     that.intervalResponds(res.data.result, 'assistant')
       //     that.setWatingRorate(false)
       //   },
@@ -111,48 +101,48 @@ export default {
       //     that.setWatingRorate(false)
       //   },
       //   complete: function (res) {
-         
+
       //   }
       // })
       console.log('this.inputValue')
       setTimeout(() => {
         var data = '有什么想了解的有想了解的呢有什么想了解的呢？了解的呢？';
-      this.setWatingRorate(false)
-      console.log(data)
-      // this.reFreshMessage('assistant', data, false)
-      this.scrollMessagesToBottom();
-      this.intervalResponds(data,'assistant',false)
-      
-    }, 3000);
-    
+        this.setWatingRorate(false)
+        console.log(data)
+
+        this.scrollMessagesToBottom();
+        this.intervalResponds(data, 'assistant', false)
+
+      }, 3000);
+
 
     },
-     //播放字符
-  intervalResponds(responds, from,sent) {
- 
-    var content = '';
-    var messages_index = this.messages.length;
-    var currentIndex = 0;
-    var intervalId = setInterval(() => {
-      if (currentIndex >= responds.length) {
-        clearInterval(intervalId);
-        return;
-      }
-      var endIndex = Math.min(currentIndex + 15, responds.length);
-      content += responds.substring(currentIndex, endIndex);
-      currentIndex = endIndex;
-      if (this.messages.length == messages_index) {
-        this.reFreshMessage(from, content,sent);
-      } else if (this.messages.length > messages_index) {
-        var msg = this.messages;
-        msg[messages_index].content = content;
-        msg[messages_index].sent = sent;
-        this.messages = msg;
-        this.scrollMessagesToBottom();
-      }
-    }, 30);
-    this.intervalId=intervalId;
-  },
+    //播放字符
+    intervalResponds(responds, from, sent) {
+
+      var content = '';
+      var messages_index = this.messages.length;
+      var currentIndex = 0;
+      var intervalId = setInterval(() => {
+        if (currentIndex >= responds.length) {
+          clearInterval(intervalId);
+          return;
+        }
+        var endIndex = Math.min(currentIndex + 15, responds.length);
+        content += responds.substring(currentIndex, endIndex);
+        currentIndex = endIndex;
+        if (this.messages.length == messages_index) {
+          this.reFreshMessage(from, content, sent);
+        } else if (this.messages.length > messages_index) {
+          var msg = this.messages;
+          msg[messages_index].content = content;
+          msg[messages_index].sent = sent;
+          this.messages = msg;
+          this.scrollMessagesToBottom();
+        }
+      }, 30);
+      this.intervalId = intervalId;
+    },
     onQuestion(question) {
       // 处理点击问题的逻辑
       question = '';
@@ -189,6 +179,25 @@ export default {
 </script>
   
 <style >
+ 
+.link-btn{
+  margin-bottom: 3px;
+  max-width: 20%;
+  left: 0px;
+  margin-left: 3px;
+}
+.el-button+.el-button {
+    margin-left: 3px;
+}
+.link-btn-row {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px; 
+ justify-content: flex-start;
+ flex-wrap: wrap;
+ 
+}
+
 .rotate {
   animation: rotateAnimation 2s linear infinite;
 }
@@ -203,8 +212,9 @@ export default {
   }
 }
 
-.box {
+.chat-rotate-box {
   margin: 10px;
+  background-color: #000;
 }
 
 .loading-icon {
@@ -221,13 +231,13 @@ export default {
   border-radius: 15px;
   background-color: rgb(247, 248, 250);
   height: 100%;
-  /* padding-right: 10px; */
-  margin-right: 10px;
+
+  margin-right: 2px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  /* position: relative; */
-  /* overflow: scroll; */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .display {
@@ -240,7 +250,8 @@ export default {
   width: 100%;
   /* height: 580px; */
   box-sizing: border-box;
-  overflow: scroll;
+  overflow: auto;
+  /* ddd */
   align-items: stretch;
 }
 
@@ -251,6 +262,7 @@ export default {
   border-radius: 10px;
   font-size: 14px;
   line-height: 1.5;
+
 }
 
 .message-content {
@@ -286,7 +298,7 @@ export default {
   height: calc(100vh - 120rpx);
   padding: 20px;
   box-sizing: border-box;
-  overflow-y: auto;
+
 }
 
 .container {
@@ -299,64 +311,42 @@ export default {
   height: 100%;
   width: 100%;
 
-  overflow-y: auto;
 
 }
 
 .input-items {
   margin-bottom: 10px;
-  overflow-x: auto;
+  /* overflow-x: auto; */
   display: flex;
   flex-direction: row;
 
 }
 
-.input-box2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  /* width: 550px; */
 
-  /* box-sizing: border-box; */
-  /* padding: 10px; */
-
-  position: fixed;
-  height: 80px;
-  bottom: 0px;
-  /* right: 15px; */
-  /* align-items: center; */
-  right: 15px;
-  /* transform: translateX(-50%); */
-
-}
 
 .input-box {
   display: flex;
-  justify-content: space-between;
-  /* display: flex; */
+  justify-content: center;
   flex-direction: row;
-  /* justify-content: center; */
   align-items: center;
-  width: 100%;
-  box-sizing: border-box;
-
+  width: 95%;
+  /* box-sizing: border-box; */
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
 }
 
 
-
-.input2 {
+.input-btn {
   display: flex;
-  /* min-height: 60px; */
-  /* max-height: 360rpx; */
-  border: none;
-  border-radius: 2px;
-  padding: 5px;
+}
+
+.input-text {
+  display: flex;
+
+  padding: 2px;
   font-size: 14px;
-  /* background-color: #f3f3f3; */
-  line-height: 1.5;
-  resize: none;
-  width: 330px;
+
 }
 
 .input {

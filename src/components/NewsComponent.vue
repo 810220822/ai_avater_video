@@ -1,9 +1,9 @@
 
 <template>
-    <div class="container-child">
-        <div class="list">
-            <div class="icons">
-
+    <div class="writer-news-container"> 
+        <div class="writer-news-list"> 
+            <div class="writer-news-icons">
+                <!-- writer-news-icons 高度30px，在顶部，固定不动，宽度100% -->
                 <!-- 一排icon按钮 -->
                 <div class="icon" v-for="icon in icons" :key="icon.id">
 
@@ -17,7 +17,7 @@
 
                 </div>
             </div>
-            <el-scrollbar style="height: 100%;">
+            <div class="news-list" style="height: 100%;"> 
                 <div class="hot-list">
                     <div class="model-title">
                         热榜
@@ -61,71 +61,64 @@
                         只展示最新 100 条榜单历史
                     </div>
                     <div style="height: 1px;">
-
                     </div>
                 </div>
-
-            </el-scrollbar>
-            <div style="height: 180px;">
-
-
             </div>
 
         </div>
-        <div class="robot">
+        <div class="writer-news-robot">
+            <!-- writer-news-robot 宽度占25%，高度适应屏幕后不变，显示在右边边-->
             <div class="model-title">
                 写作助手
             </div>
             <div class="chat-robot">
                 <ChatComponent />
-                
-            </div>
-            <div style="height: 250px;">
-
-
+                 
             </div>
         </div>
     </div>
 </template>
 <style>
-.chat-robot {
- 
-
-   display: flex;
-
+.news-list {
+    display: flex;
     width: 100%;
     height: 100%;
- 
-}
-
-.robot {
-    display: flex;
     flex: 1;
     flex-direction: column;
 
-
- position: relative;
-    width: 420px;
-    height: 100%;
-    /* overflow-y: auto; */
-
-
-
+    overflow: auto; 
 }
 
-.container-child {
+.chat-robot {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    flex: 1;
+    flex-direction: column;
+
+    overflow: auto; 
+    
+}
+
+.writer-news-robot {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    width: 25%;
+}
+
+.writer-news-container {
     display: flex;
     flex: 1;
     flex-direction: row;
-
-    width: calc(100vw-200px);
-    height: 100vh;
-
+    width: 100%;
+    height: 100%;
 }
 
-.list {
+.writer-news-list {
     display: flex;
-    flex: 2;
     flex-direction: column;
     width: 65%;
 }
@@ -135,25 +128,27 @@
     overflow-y: auto;
 }
 
+.hot-list,
+.history-list {
+    margin-bottom: 5px;
+}
+
 .news-item {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-
     border-bottom: 1px solid rgb(247, 248, 250);
     margin-top: 7px;
     margin-bottom: 7px;
-
 }
 
 .model-tip {
     font-size: 11px;
-    /* font-weight: bold; */
     margin-left: 13px;
     color: rgb(76, 76, 77);
     margin-top: 2px;
-    margin-bottom: 45px;
+    margin-bottom: 5px;
     top: 0px;
 }
 
@@ -169,24 +164,22 @@
 
 .news-title {
     font-size: 15px;
-
+    flex-grow: 1;
     margin-left: 13px;
-    /* margin-top: 7px; */
     width: 80%;
 }
 
-.icons {
+.writer-news-icons {
     display: flex;
     flex-direction: row;
     margin-top: 10px;
     justify-content: center;
-
+    width: 100%; 
 }
 
 .icon {
-    /* 图标样式 */
     width: 130px;
-
+    display: inline-block;
 }
 
 .icon-image {
@@ -196,46 +189,13 @@
 }
 
 .icon-button {
-    /* 图标按钮样式 */
-
     max-height: 180px;
     width: 120px;
-
-
     display: flex;
     justify-content: center;
     align-items: center;
     vertical-align: middle;
 }
-
-.chat-history {
-    /* 聊天记录样式 */
-}
-
-.message {
-    /* 消息样式 */
-}
-
-.input-box {
-    /* 输入框样式 */
-}
-
-.text-input {
-    /* 文本输入框样式 */
-}
-
-.send-button {
-    /* 发送按钮样式 */
-}
-
-.clear-button {
-    /* 清除按钮样的式 */
-}
-
-
-.history-list {}
-
-.hot-list {}
 </style>
 <script>
 import { Search } from '@element-plus/icons-vue';

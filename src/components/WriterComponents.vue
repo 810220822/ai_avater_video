@@ -1,12 +1,9 @@
 <template>
-    <div class="grid-container" style="">
-
-        <!-- 元素 1 -->
-        <div class="grid-header">
-
-
-            <div class="grid-search" justify="center">
-
+    <div class="writer-container" style="">
+        <!-- writer-container 自动撑满浏览器，宽高自适应 -->
+        <div class="writer-header">
+            <!-- writer-header 第一行，固定不动，在控件的顶部。高度50px -->
+            <div class="writer-search" justify="center"> 
                 <el-input v-model="inputtext" placeholder="输入查询内容..." class="input-with-select">
 
                     <template #append>
@@ -14,12 +11,11 @@
                                 <Search />
                             </el-icon></el-button>
                     </template>
-                </el-input>
-
-            </div> 
-
+                </el-input> 
+            </div>  
         </div>
-        <div class="div-tabs">
+        <div class="writer-tabs">
+            <!-- writer-header 第二行，在控件的顶部，仅靠writer-header，固定不动。高度30px -->
             <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick" stretch>
                 <el-tab-pane label="新闻热点" name="新闻热点"></el-tab-pane>
                 <el-tab-pane label="爆款热卖" name="爆款热卖"></el-tab-pane>
@@ -27,61 +23,40 @@
                 <el-tab-pane label="草稿箱" name="草稿箱"></el-tab-pane>
             </el-tabs>
         </div>
-        <div lass="div-components">
-
-            <!--点击tabs的页签，要显示对应的自定义控件。和本控件同在components文件夹下，分别是NewsComponent.vue,SellComponent.vue,DramaComponent.vue,BoxComponent.vue -->
+        <div class="writer-components">
+            <!-- writer-components 第三行，自适应浏览器大小，自动撑满剩余控件，背景色红色 -->
             <!-- 新闻热点控件 -->
-            <NewsComponent v-if="activeName === '新闻热点'" />
+            <NewsComponent v-if="activeName === '新闻热点'" style="display: flex;align-items: stretch;"/>
             <!-- 爆款热卖控件 -->
-            <SellComponent v-if="activeName === '爆款热卖'" />
+            <!-- <SellComponent v-if="activeName === '爆款热卖'" /> -->
             <!-- 爆剧剧本控件 -->
-            <DramaComponent v-if="activeName === '爆剧剧本'" />
+            <!-- <DramaComponent v-if="activeName === '爆剧剧本'" /> -->
             <!-- 草稿箱控件 -->
-            <BoxComponent v-if="activeName === '草稿箱'" />
-
+            <!-- <BoxComponent v-if="activeName === '草稿箱'" /> -->
+           
         </div>
-
+        <div style="font-size: 55px;"></div>
     </div>
 </template>
 <style>
-.div-components{
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-}
- 
-.grid-container {
-    /* padding-left: 15px;padding-right: 15px; */
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    width: 100%;
- 
-    overflow: hidden;
- 
+.writer-components {
+    display: block;
+  height: 100%;
+  width: 100%;
+  
+    overflow-y: hidden;
+ margin-bottom: 35px;
 }
 
-.div-tabs {
-    background-color: rgb(247, 248, 250);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    height: 45px;
-
-
+.writer-container {
     display: flex;
     flex-direction: column;
- 
+    height: 100%;
+   
+    overflow: auto;
 }
 
-.grid-search {
-    width: 60%;
-    background-color: rgb(247, 248, 250);
-
-    display: flex;
-    flex-direction: column;
- 
-}
-
-.grid-header {
+.writer-header {
 
 
     display: flex;
@@ -92,6 +67,28 @@
     background-color: rgb(247, 248, 250);
     height: 38px;
 }
+
+.writer-tabs {
+    background-color: rgb(247, 248, 250);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    height: 45px;
+
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.writer-search {
+    width: 60%;
+    background-color: rgb(247, 248, 250);
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+
 
 
 

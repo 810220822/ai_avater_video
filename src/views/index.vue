@@ -1,6 +1,6 @@
 <template>
-    <div style="padding-left: 15px;padding-right: 15px;">
-       
+    <div class="index-layout">
+
         <div class="first-row">
             <div class="button-row">
                 <el-button type="primary" plain> <el-icon>
@@ -25,14 +25,8 @@
                         <Mic />
                     </el-icon>声音克隆</el-button>
             </div>
-
-
             <div class="search-bar">
-                <!-- <el-input v-model="inputtext" class="search-input" placeholder="Please Input"  >  <template #prefix>
-        <i class="el-icon-search"></i>
-      </template></el-input> -->
                 <el-input v-model="inputtext" placeholder="输入名称，支持模糊查询" class="search-input" ref="inputRef">
-
                     <template #append>
                         <el-button> <el-icon>
                                 <Search />
@@ -43,10 +37,9 @@
         </div>
 
         <!-- 第三行：列表 -->
-        <div class="data-table">
-            <el-table :data="tableData" height="100%" >
+        <div class="index-data-table">
+            <el-table :data="tableData" class="index-el-table">
                 <el-table-column prop="name" label="名称"></el-table-column>
-
                 <el-table-column prop="kind" label="分类"></el-table-column>
                 <el-table-column prop="modifiedTime" label="修改时间"></el-table-column>
                 <el-table-column label="操作">
@@ -58,57 +51,85 @@
                 </el-table-column>
             </el-table>
         </div>
+        <!-- 第三行：列表 -->
+        <div class="index-data-footer">
+      
+        </div>
     </div>
 </template>
     
 <style>
+.index-layout {
+    display: flex;
+    flex-direction: column;
+   
+    padding-left: 15px;
+    padding-right: 15px;
+    height: 100%;
+}
+
 .search-input {
     display: flex;
-    flex: 1;
-    /* flex-direction: column-reverse; */
     justify-content: flex-end;
+    height: 40px;
 }
 
 .search-bar {
     display: flex;
-    /* flex-direction: column-reverse; */
     justify-content: flex-end;
-    /* padding-top: 10px; */
     padding-bottom: 10px;
     width: 300px;
-
+    height: 40px;
 }
 
 .search-input {
     width: 400px;
+    height: 40px;
 }
 
 .first-row {
     display: flex;
-    flex: 1;
+   
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
+    height: 40px;
+    
 }
 
 .button-row {
     margin-bottom: 10px;
 }
 
-.data-table {
-    /* max-width: 600px; */
-    /* margin: 0 auto; */
-    
-    width: 85%;
-    height: 80vh;
+.index-data-table {
+    display: flex;
+    flex-direction: column;
+   
 
+    width: 100%;
 
     overflow-y: auto;
-
     overflow-x: hidden;
-    position: fixed;
-    background-color: blue;
+    padding-bottom: 5px;
+    margin-bottom: 35px;
+    
+}
+
+.index-el-table {
+    display: flex;
+    flex: 1;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.index-data-footer {
+    display: flex;
+    flex-direction: column;
+  height: 35px;
+   overflow-y: auto;
+    
 }
 </style>
 <script >
@@ -120,7 +141,7 @@ import { reactive } from "vue";
 import axios from 'axios'
 const inputtext = ref('');
 
- 
+
 // const form2 = reactive({ name: "大是大非" });
 export default {
 
@@ -244,39 +265,7 @@ export default {
                     name: '工程名999',
                     kind: '工程文件',
                     modifiedTime: '2023年12月8日 18:30:54',
-                },{
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
                 }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名999',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                },{
                     name: '工程名',
                     kind: '工程文件',
                     modifiedTime: '2023年12月8日 18:30:54',
@@ -308,39 +297,7 @@ export default {
                     name: '工程名999',
                     kind: '工程文件',
                     modifiedTime: '2023年12月8日 18:30:54',
-                },{
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
                 }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                }, {
-                    name: '工程名999',
-                    kind: '工程文件',
-                    modifiedTime: '2023年12月8日 18:30:54',
-                },{
                     name: '工程名',
                     kind: '工程文件',
                     modifiedTime: '2023年12月8日 18:30:54',
@@ -372,7 +329,7 @@ export default {
                     name: '工程名999',
                     kind: '工程文件',
                     modifiedTime: '2023年12月8日 18:30:54',
-                },{
+                }, {
                     name: '工程名',
                     kind: '工程文件',
                     modifiedTime: '2023年12月8日 18:30:54',
@@ -402,6 +359,70 @@ export default {
                     modifiedTime: '2023年12月8日 18:30:54',
                 }, {
                     name: '工程名999',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名999',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: '工程名',
+                    kind: '工程文件',
+                    modifiedTime: '2023年12月8日 18:30:54',
+                }, {
+                    name: 'aaaaaaaaaaaaaaa工程名999',
                     kind: '工程文件',
                     modifiedTime: '2023年12月8日 18:30:54',
                 },

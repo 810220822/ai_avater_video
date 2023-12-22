@@ -1,16 +1,27 @@
 <template >
-    <el-breadcrumb class="breadcrumb" separator="/" style="background-color:rgb(247, 248, 250) ;">
+    <div class="breadcrumb-container" >
+        <el-breadcrumb class="breadcrumb" separator="/" >
         <el-breadcrumb-item v-for="item in breadcrumb" :key="item.index">
             <router-link :to="item.route">{{ item.label }}</router-link>
         </el-breadcrumb-item>
     </el-breadcrumb>
+    </div>
+ 
 </template>
   
  
 <style>
-.breadcrumb{
-    padding-left: 15px;
+.breadcrumb-container{
+    width: 100%;
+    left: 15px;
+    margin-left: 15px;
+     
 }
+.breadcrumb {
+     
+    background-color:rgb(247, 248, 250) ;
+}
+
 .text-large {
     font-size: 18px;
 }

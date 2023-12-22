@@ -1,92 +1,89 @@
 <template>
   <div class="common-layout">
+    <!-- common-layout 部分整体布局，浏览器宽高 -->
+    <div class="header">
 
-    <div>
       <Header class="header"></Header>
-      
+
     </div>
-
-
-    <div style="display: flex;flex-direction: row;padding-top: 55px;height: 100%;" >
-      <div class="aside" style="background-color: white;padding-top: 0px;height: 100%;">
-
+    <div class="main">
+       
+      <div class="left-aside">
         <CommonAside @handleMenuClick="handleMenuClick"></CommonAside>
-         
       </div>
-      <div style="width: 100%;height: 100%;">
-        <PageHeader class="pageHeader" :breadcrumb="breadcrumb" :title="pageTitle" :subTitle="pageSubTitle">
-        </PageHeader>
-
-        <div style="width: 100%;height: 100%;">
+      <div class="main-content">
+        <div class="breadcrumb">
+          <PageHeader class="pageHeader" :breadcrumb="breadcrumb" :title="pageTitle" :subTitle="pageSubTitle">
+        </PageHeader> 
+        </div>
+        <div class="pageContent">
           <router-view>
 
           </router-view>
+          
+          
         </div>
-
       </div>
     </div>
 
   </div>
- 
 </template>
 <style>
-.common-layout {
+.pageContent{
+ 
+  flex: 1;
   width: 100%;
   height: 100%;
-  display: flex;
-  flex:1;
-  flex-direction: column;
-  /* border: 1px solid red; */
-
-  margin: 0 auto;
-  /* overflow: hidden; */
+  
 }
-
-.pageHeader {
+.common-layout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   display: flex;
-  /* flex-direction: column; */
-  
-  
-  background-color: #f5f5f5;
-  height: 25px;
-  margin-top: 0;
-  margin-left: 0;
-  display: flex;
-  align-items: center;
-
-  top: 55px;
-  width: 100%;
-  height: 35px;
+  flex-direction: column;
  
-
 }
 
 .header {
-
-  width: 100vw;
   height: 55px;
-  margin: 0;
-  padding: 0;
-  position: fixed;
-  z-index: 999;
 }
 
-.aside {
-  background-color: white;
-  border: 0px;
-  width: 200px;
+.left-aside {
+  width: 230px;
+  overflow-y: auto;
+  /* 其他样式属性 */
+  overflow-x: hidden;
+  max-height: calc(100vh - 55px);
+  /* 减去header的高度 */
+   
+  position: relative;
   height: 100%;
+  border-right: 1px solid rgb(220, 230, 232);
+}
 
+.main {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 55px);
+  /* 减去header的高度 */
 
 }
 
-.el-main {
+.main-content {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  /* 填充剩余空间 */
+  overflow: hidden;
+  
+  
+}
 
+.breadcrumb {
+  display: flex;
+  align-items: center; 
+  height: 30px;
+  width: 100%; 
 }
 </style>
 <script>
@@ -122,7 +119,7 @@ export default {
 
   name: 'App',
   components: {
-    CommonAside, Header, PageHeader,Mainviews
+    CommonAside, Header, PageHeader, Mainviews
   }
 }
 </script>
