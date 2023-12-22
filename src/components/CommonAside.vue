@@ -40,10 +40,6 @@
     overflow-y: auto;
 
     overflow-x: hidden;
- 
-    
-
-   
     position: absolute; /* 修改为 absolute */
     
 }

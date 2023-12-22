@@ -1,11 +1,11 @@
 
 <template>
-    <ChatComponent2 />
+    <ChatComponent />
 </template>
 <style></style>
 <script>
 import { Search } from '@element-plus/icons-vue';
-import ChatComponent2 from "./ChatComponent2.vue";
+import ChatComponent from "./ChatComponent.vue";
 export default {
 
     mounted() {
@@ -17,7 +17,7 @@ export default {
     },
     components: {
 
-        Search,ChatComponent2
+        Search,ChatComponent
     },
     data() {
         return {

@@ -8,10 +8,12 @@
         {{ item.content }}
       </div>
     
-        <div class="link-btn-row" v-if="rorateTxt === '' && !rotate">
+        <div class="link-btn-row" v-if="showButtons">
+         
         <el-button v-for="button in buttonList" :key="button" @click="onQuestion(button)" class="link-btn" >
           {{ button }}
         </el-button>
+    
       </div>
  
      
@@ -61,7 +63,7 @@ export default {
       }
       ],
       inputValue: '',
-       
+      showButtons :true,
       buttonList: ['写剧本','写剧本'], // 按钮列表的数据
     };
   },
@@ -72,15 +74,23 @@ export default {
 
         this.rorateTxt = "|";
         this.rotate = true;
+        this.showButtons = false;
          
       } else {
         this.rorateTxt = "";
         this.rotate = false;
-       
+        
       }
     },
+     //通过axios访问backendURL的flask接口，下载数据的公共方法。
+     async getMessages() {
+        let result = await fetchData(backendURL + '/Chatting');
+        this.messages = result.data.result;
+        this.scrollMessagesToBottom();
+      },
     chattingResponds() {
-
+     
+   
       // console.log(that.data.messages)
       // 在小程序中发起网络请求
       // wx.request({
@@ -126,6 +136,7 @@ export default {
       var intervalId = setInterval(() => {
         if (currentIndex >= responds.length) {
           clearInterval(intervalId);
+          this.showButtons = true;
           return;
         }
         var endIndex = Math.min(currentIndex + 15, responds.length);
@@ -179,7 +190,7 @@ export default {
 </script>
   
 <style >
- 
+  
 .link-btn{
   margin-bottom: 3px;
   max-width: 20%;
