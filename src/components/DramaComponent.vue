@@ -1,76 +1,342 @@
+
 <template>
- <div style="display: flex;flex-direction: column;height: 75vh;">
-  <div  style="display: flex;flex-direction: column;height: 50%;background-color: red;">
-asdf
+  <div class="writer-news-container">
+      <div class="writer-news-list">
+          <div class="writer-news-icons">
+              <!-- writer-news-icons 高度30px，在顶部，固定不动，宽度100% -->
+              <!-- 一排icon按钮 -->
+              <div class="icon" v-for="icon in icons" :key="icon.id">
+
+                  <!-- icon 图标 -->
+                  <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large"
+                      :class="{ 'clicked': icon.id === selectedIcon }">
+
+                      <img :src="getIconPath(icon.iconUrl)" alt="icon" class="icon-image" @click="updateData(icon)">
+
+                      {{ icon.name }}
+                  </el-button>
+
+              </div>
+          </div>
+          <div class="news-list" style="height: 100%;">
+              <div class="hot-list">
+                  <div class="model-title">
+                      热榜
+                  </div>
+
+                  <div class="news-item" v-for="item in hotList" :key="item.id">
+                      <!-- 标题 -->
+                      <div class="news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
+                      <!-- 浏览量 -->
+                      <div class="news-views-count">浏览量：{{ item.count }}</div>
+                      <!-- 详细按钮 -->
+                      <el-button class="detail-button" @click="selectItem(item)" type="primary" link>
+                          分析<el-icon>
+                              <ArrowRight />
+                          </el-icon>
+
+                      </el-button>
+                      <!-- 进入按钮 -->
+
+                  </div>
+                  <div class="model-tip">
+                      更新于：2023年12月20日 17:04:51
+                  </div>
+              </div>
+              <div class="history-list">
+                  <div class="model-title">
+                      近期热榜
+                  </div>
+
+                  <div class="news-item" v-for="item in historyList" :key="item.id">
+                      <!-- 标题 -->
+                      <div class="news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
+                      <!-- 浏览量 -->
+                      <div class="news-views-count"> 浏览量：{{ item.count }} </div>
+                      <!-- 详细按钮 -->
+                      <el-button class="detail-button" @click="selectItem(item)" type="primary" link> 分析<el-icon>
+                              <ArrowRight />
+                          </el-icon></el-button>
+
+
+                  </div>
+                  <div class="model-tip">
+                      只展示最新 100 条榜单历史
+                  </div>
+                  <div style="height: 1px;">
+                  </div>
+              </div>
+          </div>
+
+      </div>
+      <div class="writer-news-robot">
+          <!-- writer-news-robot 宽度占25%，高度适应屏幕后不变，显示在右边边-->
+          <div class="model-title">
+              写作助手
+          </div>
+          <div class="chat-robot">
+              <ChatComponent ref="chatComponent" />
+
+          </div>
+      </div>
   </div>
-  <div style="display: flex;flex-direction: column;height: 50%;background-color: blue;">
-大丰收的发
-</div >
- </div>
 </template>
-                      
-<script>
-export default {
-  data() {
-    return {
-      newMessage: '',
-      messages: [
-        { text: '你好！', sent: true },
-        { text: '嗨，你好！', sent: false },
-        // 更多消息...    
-      ],
-    };
-  },
-  methods: {
-    sendMessage() {
-      if (this.newMessage.trim() !== '') {
-        this.messages.push({ text: this.newMessage, sent: true });
-        this.newMessage = ''; // 清空输入框   
-      }
-    },
-  },
-};
-</script>
-<style scoped>
-.chat-container {
-  border: 1px solid #ccc;
-  padding: 10px;
+<style>
+.icon-button {
+  /* 添加你想要的样式 */
 }
 
-.messages {
-  margin-bottom: 10px;
-  height: 300px;
-  /* 根据需要调整 */
+.icon-button.clicked {
+  /* 添加你想要的被点击时的样式 */
+  background-color: #edf5fe;
+  border: 1px solid #dceafa;
+}
+
+
+.news-title {
+
+  display: flex;
+  /* flex-direction:flex-start; */
+  text-align: left;
+  color: #579ff8;
+  cursor: pointer;
+
+  font-size: 14px;
+  flex-grow: 1;
+  margin-left: 13px;
+  width: 70%;
+}
+
+.detail-button {
+  width: 10%;
+}
+
+.news-views-count {
+  color: gray;
+  font-size: smaller;
+  text-align: left;
+  width: 20%;
+}
+
+.news-list {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  flex-direction: column;
+
+  overflow: auto;
+}
+
+.chat-robot {
+  display: flex;
+  width: 100%;
+  height: 100%;
+
+  flex: 1;
+  flex-direction: column;
+
+  overflow: auto;
+
+}
+
+.writer-news-robot {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  width: 25%;
+}
+
+.writer-news-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
+
+.writer-news-list {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
+
+.scroll-list {
+  height: 70vh;
   overflow-y: auto;
 }
 
-.message {
-  padding: 5px 10px;
-  margin: 5px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+.hot-list,
+.history-list {
+  margin-bottom: 5px;
 }
 
-.sent {
-  align-self: flex-end;
-  background-color:
-    #e0e0e0;
-}
-
-.received {
-  align-self: flex-start;
-  background-color: #f0f0f0;
-}
-
-.input-area {
+.news-item {
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid rgb(247, 248, 250);
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-right: 20px;
 }
 
-.input-area input {
-  flex-grow: 1;
-  margin-right: 10px;
+.model-tip {
+  font-size: 11px;
+  margin-left: 13px;
+  color: rgb(76, 76, 77);
+  margin-top: 2px;
+  margin-bottom: 5px;
+  top: 0px;
 }
 
-.input-area button {
-  padding: 5px 10px;
-}</style>
+.model-title {
+  font-size: 15px;
+  font-weight: bold;
+  margin-left: 13px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  height: 20px;
+
+}
+
+
+
+.writer-news-icons {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.icon {
+  width: 130px;
+  display: inline-block;
+}
+
+.icon-image {
+  width: 30px;
+  height: 30px;
+  margin-right: 7px;
+}
+
+.icon-button {
+  max-height: 180px;
+  width: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+}
+</style>
+<script> 
+import ChatComponent from "./ChatComponent.vue";
+import { listURL } from '@/utils/api.js';
+export default {
+
+  mounted() {
+      if (this.icons.length > 0) {
+          this.selectedIcon = this.icons[0].id;
+          this.selectedIcoName = this.icons[0].name;
+          this.updateData(this.icons[0]);
+      }
+
+
+  },
+  methods:
+  {
+      selectIcon(icon) {
+          this.selectedIcon = icon;
+      },
+      getIconPath(iconName) {
+          return require(`@/assets/logo/${iconName}.png`);
+      },
+      updateData(icon) {
+          // 更新热榜和近期热榜的数据
+          this.selectedIcon = icon.id;
+          this.selectedIcoName = icon.name;
+          this.getNews(10, 'news');
+          this.getNews(100, 'history');
+      },
+      selectItem(item) {
+          // 选择热榜或近期热榜的项目，写作助手自动输入一条信息
+          // 通过 $refs 引用 ChatComponent 组件
+          const chatComponent = this.$refs.chatComponent;
+
+          // 调用组件的方法传递数据
+          chatComponent.setItem(item.link, item.title);
+      },
+      openLink(link) {
+          window.open(link, '_blank');
+          // window.location.href = link;
+      },
+      sendMessage() {
+          // 发送消息，将输入的文本添加到聊天记录中
+      },
+      clearHistory() {
+          // 清除聊天记录
+      },
+      getNews(count, type) {
+          console.log(count)
+          const website = this.selectedIcoName;// 替换为你的网站参数
+
+          this.$http.get(listURL+'/ListResource', {
+              params: {
+                  website: website,
+                  count: count,
+                  searchtxt:this.searchTxt,
+                  listtype:"books",
+              }
+          })
+              .then(response => {
+                  console.log(response.data);
+                  if (type === 'news') {
+                      this.hotList = response.data;
+                  } else if (type === 'history') {
+                      this.historyList = response.data;
+                  }
+
+              })
+              .catch(error => {
+                  console.error(error);
+              });
+      },
+      setSearch(txt) {
+           
+          this.searchTxt = txt;
+          this.getNews(10, 'news');
+          this.getNews(100, 'history');
+      },
+  },
+  components: {
+
+      ChatComponent
+  },
+
+  data() {
+      return {
+          selectedIcon: null,
+          selectedIcoName: '',
+          icons: [
+              { id: 1, iconUrl: 'jjwxc', name: '晋江' },
+              { id: 2, iconUrl: 'qidian', name: '起点中文' },
+ 
+              { id: 4, iconUrl: 'weread', name: '微信读书' },
+              { id: 5, iconUrl: 'qimao', name: '七猫' },
+
+          ],
+
+          hotList: [
+          ],
+          historyList: [
+          ],
+
+          searchText: ''
+
+      };
+  },
+}
+</script>

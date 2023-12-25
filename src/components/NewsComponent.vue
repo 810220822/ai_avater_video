@@ -284,12 +284,12 @@ export default {
             console.log(count)
             const website = this.selectedIcoName;// 替换为你的网站参数
 
-            this.$http.get(listURL+'/NewsListResource', {
+            this.$http.get(listURL+'/ListResource', {
                 params: {
                     website: website,
                     count: count,
                     searchtxt:this.searchTxt,
-                 
+                    listtype:"news",
                 }
             })
                 .then(response => {

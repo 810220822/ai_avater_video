@@ -28,11 +28,11 @@
             <!-- 新闻热点控件 -->
             <NewsComponent v-if="activeName === '新闻热点'" ref="news"/>
             <!-- 爆款热卖控件 -->
-            <SellComponent v-if="activeName === '爆款热卖'" />
+            <SellComponent v-if="activeName === '爆款热卖'" ref="sells"/>
             <!-- 爆剧剧本控件 -->
-            <!-- <DramaComponent v-if="activeName === '爆剧剧本'" /> -->
+            <DramaComponent v-if="activeName === '爆剧剧本'" ref="books"/>
             <!-- 草稿箱控件 -->
-            <!-- <BoxComponent v-if="activeName === '草稿箱'" /> -->
+            <BoxComponent v-if="activeName === '草稿箱'" ref="boxes"/>
            
         </div>
         <div style="font-size: 55px;"></div>
@@ -167,6 +167,8 @@ export default {
         },
         onSearch() {
             this.$refs.news.setSearch(this.inputtext)
+            this.$refs.books.setSearch(this.inputtext)
+            this.$refs.sells.setSearch(this.inputtext)
         }
     },
     components: {
