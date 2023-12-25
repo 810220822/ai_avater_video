@@ -1,11 +1,13 @@
 
 <template>
-    <ChatComponent />
+    <el-button type="primary" @click="handleClick">
+        post
+    </el-button>
 </template>
 <style></style>
 <script>
-import { Search } from '@element-plus/icons-vue';
-import ChatComponent from "./ChatComponent.vue";
+import { backendURL } from '@/utils/api.js';
+
 export default {
 
     mounted() {
@@ -13,11 +15,30 @@ export default {
     },
     methods:
     {
+        handleClick() {
+            var url = backendURL + '/WriterChatting';
+            // this.$http.get(backendURL + '/WriterChatting')
+            this.$http({
+                method: 'post',
+                url: url,
+                data:  JSON.stringify({ result: ['value'] }),
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-requested-with': 'XMLHttpRequest'  
+                }
 
+            })
+                .then(response => {
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
     },
     components: {
 
-        Search,ChatComponent
+
     },
     data() {
         return {

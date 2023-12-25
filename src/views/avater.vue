@@ -2,31 +2,25 @@
     avater
 </template>
     
-<style>
-
-</style>
+<style></style>
 <script >
- 
+
 import { ElIcon } from 'element-plus';
-import axios from 'axios'
+ 
 export default {
     methods:
     {
-        
+
     },
     components: {
         ElIcon
-    },    data(){
-        return{
-            test:""
+    }, data() {
+        return {
+            test: ""
         }
     },
-    mounted(){
-        axios.get("http://localhost:5000/").then(res=>{
-            this.test = res.data
-            console.log(res)
-            console.log(res.data)
-        })
+    mounted() {
+       
     }
 }
 </script>

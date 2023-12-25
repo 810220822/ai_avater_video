@@ -7,16 +7,16 @@
         :class="{ 'sent': item.sent, 'received': !item.sent }">
         {{ item.content }}
       </div>
-    
-        <div class="link-btn-row" v-if="showButtons">
-         
-        <el-button v-for="button in buttonList" :key="button" @click="onQuestion(button)" class="link-btn" >
+
+      <div class="link-btn-row" v-if="showButtons">
+
+        <el-button v-for="button in buttonList" :key="button" @click="onQuestion(button)" class="link-btn">
           {{ button }}
         </el-button>
-    
+
       </div>
- 
-     
+
+
       <div class="chat-rotate-box" :class="{ 'rotate': rotate }">
         <span v-if="rorateTxt === '|' && rotate" class="loading-icon">{{ rorateTxt }}</span>
         <!-- <span v-else-if="rorateTxt !== '' || rotate">{{ rorateTxt }}</span> -->
@@ -34,18 +34,18 @@
 </template>
   
 <script>
-import { ref } from 'vue';
-import { ElScrollbar, ElButton, ElImage, ElInput } from 'element-plus';
-import { fetchData, backendURL, delayedString } from '@/utils/api.js';
 
-const intervalId = null;
+import {  ElButton, ElInput } from 'element-plus';
+import { listURL,backendURL } from '@/utils/api.js';
+
+
 
 
 export default {
   components: {
-    ElScrollbar,
+
     ElButton,
-    ElImage,
+
     ElInput,
 
   },
@@ -63,8 +63,8 @@ export default {
       }
       ],
       inputValue: '',
-      showButtons :true,
-      buttonList: ['写剧本','写剧本'], // 按钮列表的数据
+      showButtons: true,
+      buttonList: ['写剧本', '写剧本'], // 按钮列表的数据
     };
   },
   methods: {
@@ -75,57 +75,54 @@ export default {
         this.rorateTxt = "|";
         this.rotate = true;
         this.showButtons = false;
-         
+
       } else {
         this.rorateTxt = "";
         this.rotate = false;
-        
+
       }
     },
-     //通过axios访问backendURL的flask接口，下载数据的公共方法。
-     async getMessages() {
-        let result = await fetchData(backendURL + '/Chatting');
-        this.messages = result.data.result;
-        this.scrollMessagesToBottom();
-      },
-    chattingResponds() {
-     
-   
-      // console.log(that.data.messages)
-      // 在小程序中发起网络请求
-      // wx.request({
-      //   url: flaskUrl + '/Chatting',
+    setItem(link, title) {
+      // 处理传递的 link 和 name 数据
+      // 例如：this.link = link; this.name = name;
 
-      //   method: 'POST',
+      // this.messages.push({ content: this.inputValue, sent: true ,from:"user"});
+      var message = '分析热点：' + title + ';地址：' + link + '。'
+      this.reFreshMessage('user', message, true)
 
-      //   data: {
-      //     result: that.data.messages
-      //   },
-      //   success: function (res) {
+      this.scrollMessagesToBottom();
 
-      //     that.intervalResponds(res.data.result, 'assistant')
-      //     that.setWatingRorate(false)
-      //   },
-      //   fail: function (res) {
-      //     that.intervalResponds('服务错误：' + res.errMsg, 'assistant')
-      //     that.setWatingRorate(false)
-      //   },
-      //   complete: function (res) {
+      this.setWatingRorate(true)
 
-      //   }
-      // })
-      console.log('this.inputValue')
-      setTimeout(() => {
-        var data = '有什么想了解的有想了解的呢有什么想了解的呢？了解的呢？';
-        this.setWatingRorate(false)
-        console.log(data)
+      this.chattingResponds()
+    },
+    chattingResponds: function () {
 
-        this.scrollMessagesToBottom();
-        this.intervalResponds(data, 'assistant', false)
+      var url = backendURL + "/WriterChatting";
+      console.log(url);
 
-      }, 3000);
+      this.$http({
+        method: 'post',
+        url: url,
+        data: { result: this.messages },
+        headers: {
+          'Content-Type': 'application/json',
+          'x-requested-with': 'XMLHttpRequest'
+        }
 
+      })
+        .then(response => {
+          var data = response.data.result;
+          console.log(response.data);
+          this.setWatingRorate(false)
+          console.log(data)
 
+          this.scrollMessagesToBottom();
+          this.intervalResponds(data, 'assistant', false)
+        })
+        .catch(error => {
+          console.error(error);
+        }); 
     },
     //播放字符
     intervalResponds(responds, from, sent) {
@@ -156,8 +153,20 @@ export default {
     },
     onQuestion(question) {
       // 处理点击问题的逻辑
-      question = '';
+     
       console.log(question)
+            // 处理传递的 link 和 name 数据
+      // 例如：this.link = link; this.name = name;
+
+      // this.messages.push({ content: this.inputValue, sent: true ,from:"user"});
+       
+      this.reFreshMessage('user', question, true)
+
+      this.scrollMessagesToBottom();
+
+      this.setWatingRorate(true)
+
+      this.chattingResponds()
     },
     onSend() {
       if (this.inputValue.trim() !== '') {
@@ -177,7 +186,7 @@ export default {
       // 滚动消息到底部
       this.$nextTick(() => {
         const messagesContainer = this.$refs.messagesContainer;
-        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        messagesContainer.scrollTop = messagesContainer.scrollHeight ;
       });
     },
     reFreshMessage(from, content, sent) {
@@ -190,23 +199,24 @@ export default {
 </script>
   
 <style >
-  
-.link-btn{
+.link-btn {
   margin-bottom: 3px;
   max-width: 20%;
   left: 0px;
   margin-left: 3px;
 }
+
 .el-button+.el-button {
-    margin-left: 3px;
+  margin-left: 3px;
 }
+
 .link-btn-row {
   display: flex;
   flex-direction: row;
-  margin-left: 10px; 
- justify-content: flex-start;
- flex-wrap: wrap;
- 
+  margin-left: 10px;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+
 }
 
 .rotate {

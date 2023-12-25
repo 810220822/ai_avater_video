@@ -7,7 +7,7 @@
                 <el-input v-model="inputtext" placeholder="输入查询内容..." class="input-with-select">
 
                     <template #append>
-                        <el-button> <el-icon>
+                        <el-button @click="onSearch"> <el-icon>
                                 <Search />
                             </el-icon></el-button>
                     </template>
@@ -26,9 +26,9 @@
         <div class="writer-components">
             <!-- writer-components 第三行，自适应浏览器大小，自动撑满剩余控件，背景色红色 -->
             <!-- 新闻热点控件 -->
-            <NewsComponent v-if="activeName === '新闻热点'" style="display: flex;align-items: stretch;"/>
+            <NewsComponent v-if="activeName === '新闻热点'" ref="news"/>
             <!-- 爆款热卖控件 -->
-            <!-- <SellComponent v-if="activeName === '爆款热卖'" /> -->
+            <SellComponent v-if="activeName === '爆款热卖'" />
             <!-- 爆剧剧本控件 -->
             <!-- <DramaComponent v-if="activeName === '爆剧剧本'" /> -->
             <!-- 草稿箱控件 -->
@@ -165,6 +165,9 @@ export default {
             this.activeTab = tab.name;
 
         },
+        onSearch() {
+            this.$refs.news.setSearch(this.inputtext)
+        }
     },
     components: {
 

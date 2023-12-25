@@ -1,14 +1,15 @@
 
 <template>
-    <div class="writer-news-container"> 
-        <div class="writer-news-list"> 
+    <div class="writer-news-container">
+        <div class="writer-news-list">
             <div class="writer-news-icons">
                 <!-- writer-news-icons 高度30px，在顶部，固定不动，宽度100% -->
                 <!-- 一排icon按钮 -->
                 <div class="icon" v-for="icon in icons" :key="icon.id">
 
                     <!-- icon 图标 -->
-                    <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large">
+                    <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large"
+                        :class="{ 'clicked': icon.id === selectedIcon }">
 
                         <img :src="getIconPath(icon.iconUrl)" alt="icon" class="icon-image" @click="updateData(icon)">
 
@@ -17,7 +18,7 @@
 
                 </div>
             </div>
-            <div class="news-list" style="height: 100%;"> 
+            <div class="news-list" style="height: 100%;">
                 <div class="hot-list">
                     <div class="model-title">
                         热榜
@@ -25,15 +26,18 @@
 
                     <div class="news-item" v-for="item in hotList" :key="item.id">
                         <!-- 标题 -->
-                        <div class="news-title">{{ item.id }}.{{ item.title }}</div>
+                        <div class="news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
                         <!-- 浏览量 -->
-                        <div class="news-views-count">{{ item.count }}</div>
+                        <div class="news-views-count">浏览量：{{ item.count }}</div>
                         <!-- 详细按钮 -->
-                        <el-button class="detail-button" @click="selectItem(item)" type="primary" link>分析</el-button>
+                        <el-button class="detail-button" @click="selectItem(item)" type="primary" link>
+                            分析<el-icon>
+                                <ArrowRight />
+                            </el-icon>
+
+                        </el-button>
                         <!-- 进入按钮 -->
-                        <el-icon class="enter-button" @click="openLink(item.link)">
-                            <ArrowRight />
-                        </el-icon>
+
                     </div>
                     <div class="model-tip">
                         更新于：2023年12月20日 17:04:51
@@ -46,15 +50,14 @@
 
                     <div class="news-item" v-for="item in historyList" :key="item.id">
                         <!-- 标题 -->
-                        <div class="news-title">{{ item.id }}.{{ item.title }}</div>
+                        <div class="news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
                         <!-- 浏览量 -->
-                        <div class="news-views-count"> {{ item.count }}</div>
+                        <div class="news-views-count"> 浏览量：{{ item.count }} </div>
                         <!-- 详细按钮 -->
-                        <el-button class="detail-button" @click="selectItem(item)" type="primary" link>分析</el-button>
-                        <!-- 进入按钮 -->
-                        <el-icon class="enter-button" @click="openLink(item.link)">
-                            <ArrowRight />
-                        </el-icon>
+                        <el-button class="detail-button" @click="selectItem(item)" type="primary" link> 分析<el-icon>
+                                <ArrowRight />
+                            </el-icon></el-button>
+
 
                     </div>
                     <div class="model-tip">
@@ -72,13 +75,49 @@
                 写作助手
             </div>
             <div class="chat-robot">
-                <ChatComponent />
-                 
+                <ChatComponent ref="chatComponent" />
+
             </div>
         </div>
     </div>
 </template>
 <style>
+.icon-button {
+    /* 添加你想要的样式 */
+}
+
+.icon-button.clicked {
+    /* 添加你想要的被点击时的样式 */
+    background-color: #edf5fe;
+    border: 1px solid #dceafa;
+}
+
+
+.news-title {
+
+    display: flex;
+    /* flex-direction:flex-start; */
+    text-align: left;
+    color: #579ff8;
+    cursor: pointer;
+
+    font-size: 14px;
+    flex-grow: 1;
+    margin-left: 13px;
+    width: 70%;
+}
+
+.detail-button {
+    width: 10%;
+}
+
+.news-views-count {
+    color: gray;
+    font-size: smaller;
+    text-align: left;
+    width: 20%;
+}
+
 .news-list {
     display: flex;
     width: 100%;
@@ -86,7 +125,7 @@
     flex: 1;
     flex-direction: column;
 
-    overflow: auto; 
+    overflow: auto;
 }
 
 .chat-robot {
@@ -97,8 +136,8 @@
     flex: 1;
     flex-direction: column;
 
-    overflow: auto; 
-    
+    overflow: auto;
+
 }
 
 .writer-news-robot {
@@ -141,6 +180,7 @@
     border-bottom: 1px solid rgb(247, 248, 250);
     margin-top: 7px;
     margin-bottom: 7px;
+    margin-right: 20px;
 }
 
 .model-tip {
@@ -162,19 +202,14 @@
 
 }
 
-.news-title {
-    font-size: 15px;
-    flex-grow: 1;
-    margin-left: 13px;
-    width: 80%;
-}
+
 
 .writer-news-icons {
     display: flex;
     flex-direction: row;
     margin-top: 10px;
     justify-content: center;
-    width: 100%; 
+    width: 100%;
 }
 
 .icon {
@@ -198,11 +233,18 @@
 }
 </style>
 <script>
-import { Search } from '@element-plus/icons-vue';
+import { ArrowRight } from '@element-plus/icons-vue';
 import ChatComponent from "./ChatComponent.vue";
+import { listURL } from '@/utils/api.js';
 export default {
 
     mounted() {
+        if (this.icons.length > 0) {
+            this.selectedIcon = this.icons[0].id;
+            this.selectedIcoName = this.icons[0].name;
+            this.updateData(this.icons[0]);
+        }
+
 
     },
     methods:
@@ -215,27 +257,70 @@ export default {
         },
         updateData(icon) {
             // 更新热榜和近期热榜的数据
+            this.selectedIcon = icon.id;
+            this.selectedIcoName = icon.name;
+            this.getNews(10, 'news');
+            this.getNews(100, 'history');
         },
         selectItem(item) {
             // 选择热榜或近期热榜的项目，写作助手自动输入一条信息
+            // 通过 $refs 引用 ChatComponent 组件
+            const chatComponent = this.$refs.chatComponent;
+
+            // 调用组件的方法传递数据
+            chatComponent.setItem(item.link, item.title);
         },
         openLink(link) {
-            // 在新的标签页中打开链接
+            window.open(link, '_blank');
+            // window.location.href = link;
         },
         sendMessage() {
             // 发送消息，将输入的文本添加到聊天记录中
         },
         clearHistory() {
             // 清除聊天记录
-        }
+        },
+        getNews(count, type) {
+            console.log(count)
+            const website = this.selectedIcoName;// 替换为你的网站参数
+
+            this.$http.get(listURL+'/NewsListResource', {
+                params: {
+                    website: website,
+                    count: count,
+                    searchtxt:this.searchTxt,
+                 
+                }
+            })
+                .then(response => {
+                    console.log(response.data);
+                    if (type === 'news') {
+                        this.hotList = response.data;
+                    } else if (type === 'history') {
+                        this.historyList = response.data;
+                    }
+
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
+        setSearch(txt) {
+             
+            this.searchTxt = txt;
+            this.getNews(10, 'news');
+            this.getNews(100, 'history');
+        },
     },
     components: {
 
         ChatComponent
     },
+
     data() {
         return {
-            selectedIcon: '',
+            selectedIcon: null,
+            selectedIcoName: '',
             icons: [
                 { id: 1, iconUrl: 'xiaohongshu', name: '小红书' },
                 { id: 2, iconUrl: 'zhihu', name: '知乎' },
@@ -244,53 +329,13 @@ export default {
                 { id: 5, iconUrl: 'weibo', name: '微博' },
 
             ],
+
             hotList: [
-                { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
-                { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
-                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' }, { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
-                { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
-                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' }, { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
-                { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
-                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' }, { id: 1, title: '热榜1的标题名称', count: 100, link: 'https://twitter.com/home' },
-                { id: 2, title: '热榜2的标题名称', count: 200, link: 'https://twitter.com/home' },
-                { id: 3, title: '热榜3的标题名称', count: 300, link: 'https://twitter.com/home' },
             ],
             historyList: [
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称', count: 3000, link: 'https://twitter.com/home' },
-                { id: 1, title: '近期热榜1的标题名称', count: 1000, link: 'https://twitter.com/home' },
-                { id: 2, title: '近期热榜2的标题名称', count: 2000, link: 'https://twitter.com/home' },
-                { id: 3, title: '近期热榜3的标题名称asfsadf', count: 3000, link: 'https://twitter.com/home' },
             ],
-            chatHistory: [
-                { id: 1, content: '历史聊天记录1' },
-                { id: 2, content: '历很抱歉，由于输入的' },
-                { id: 2, content: '历史聊天记录2' },
-                { id: 3, content: '历史聊天记录3' }
-            ],
-            inputText: ''
+
+            searchText: ''
 
         };
     },
