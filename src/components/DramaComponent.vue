@@ -1,8 +1,8 @@
 
 <template>
-  <div class="writer-news-container">
-      <div class="writer-news-list">
-          <div class="writer-news-icons">
+  <div class="writer-books-container">
+      <div class="writer-books-list">
+          <div class="writer-books-icons">
               <!-- writer-news-icons 高度30px，在顶部，固定不动，宽度100% -->
               <!-- 一排icon按钮 -->
               <div class="icon" v-for="icon in icons" :key="icon.id">
@@ -24,11 +24,11 @@
                       热榜
                   </div>
 
-                  <div class="news-item" v-for="item in hotList" :key="item.id">
+                  <div class="books-news-item" v-for="item in hotList" :key="item.id">
                       <!-- 标题 -->
-                      <div class="news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
+                      <div class="books-news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
                       <!-- 浏览量 -->
-                      <div class="news-views-count">浏览量：{{ item.count }}</div>
+                      <div class="books-news-views-count">浏览量：{{ item.count }}</div>
                       <!-- 详细按钮 -->
                       <el-button class="detail-button" @click="selectItem(item)" type="primary" link>
                           分析<el-icon>
@@ -48,11 +48,11 @@
                       近期热榜
                   </div>
 
-                  <div class="news-item" v-for="item in historyList" :key="item.id">
+                  <div class="books-news-item" v-for="item in historyList" :key="item.id">
                       <!-- 标题 -->
-                      <div class="news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
+                      <div class="books-news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
                       <!-- 浏览量 -->
-                      <div class="news-views-count"> 浏览量：{{ item.count }} </div>
+                      <div class="books-news-views-count"> 浏览量：{{ item.count }} </div>
                       <!-- 详细按钮 -->
                       <el-button class="detail-button" @click="selectItem(item)" type="primary" link> 分析<el-icon>
                               <ArrowRight />
@@ -69,12 +69,12 @@
           </div>
 
       </div>
-      <div class="writer-news-robot">
+      <div class="writer-book-robot">
           <!-- writer-news-robot 宽度占25%，高度适应屏幕后不变，显示在右边边-->
           <div class="model-title">
               写作助手
           </div>
-          <div class="chat-robot">
+          <div class="book-chat-robot">
               <ChatComponent ref="chatComponent" />
 
           </div>
@@ -93,7 +93,7 @@
 }
 
 
-.news-title {
+.books-news-title {
 
   display: flex;
   /* flex-direction:flex-start; */
@@ -107,11 +107,11 @@
   width: 70%;
 }
 
-.detail-button {
+.books-detail-button {
   width: 10%;
 }
 
-.news-views-count {
+.books-news-views-count {
   color: gray;
   font-size: smaller;
   text-align: left;
@@ -128,7 +128,7 @@
   overflow: auto;
 }
 
-.chat-robot {
+.book-chat-robot {
   display: flex;
   width: 100%;
   height: 100%;
@@ -140,7 +140,7 @@
 
 }
 
-.writer-news-robot {
+.writer-book-robot {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -148,7 +148,7 @@
   width: 25%;
 }
 
-.writer-news-container {
+.writer-books-container {
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -156,7 +156,7 @@
   height: 100%;
 }
 
-.writer-news-list {
+.writer-books-list {
   display: flex;
   flex-direction: column;
   width: 65%;
@@ -172,7 +172,7 @@
   margin-bottom: 5px;
 }
 
-.news-item {
+.books-news-item {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -204,7 +204,7 @@
 
 
 
-.writer-news-icons {
+.writer-books-icons {
   display: flex;
   flex-direction: row;
   margin-top: 10px;

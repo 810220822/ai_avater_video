@@ -27,6 +27,9 @@
                     <div class="news-item" v-for="item in hotList" :key="item.id">
                         <!-- 标题 -->
                         <div class="news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
+
+
+
                         <!-- 浏览量 -->
                         <div class="news-views-count">浏览量：{{ item.count }}</div>
                         <!-- 详细按钮 -->
@@ -51,12 +54,17 @@
                     <div class="news-item" v-for="item in historyList" :key="item.id">
                         <!-- 标题 -->
                         <div class="news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
+
+
                         <!-- 浏览量 -->
-                        <div class="news-views-count"> 浏览量：{{ item.count }} </div>
+                        <div class="news-views-count">浏览量：{{ item.count }}</div>
                         <!-- 详细按钮 -->
-                        <el-button class="detail-button" @click="selectItem(item)" type="primary" link> 分析<el-icon>
+                        <el-button class="detail-button" @click="selectItem(item)" type="primary" link>
+                            分析<el-icon>
                                 <ArrowRight />
-                            </el-icon></el-button>
+                            </el-icon>
+
+                        </el-button>
 
 
                     </div>
@@ -96,7 +104,7 @@
 .news-title {
 
     display: flex;
-    /* flex-direction:flex-start; */
+
     text-align: left;
     color: #579ff8;
     cursor: pointer;
@@ -104,28 +112,35 @@
     font-size: 14px;
     flex-grow: 1;
     margin-left: 13px;
-    width: 70%;
+    width: 80%;
 }
 
+
 .detail-button {
-    width: 10%;
+    /* width: auto; */
+    margin-left: 10px;
+    /* 调整分析按钮的左侧间距 */
 }
 
 .news-views-count {
     color: gray;
     font-size: smaller;
-    text-align: left;
-    width: 20%;
+    margin-right: 10px;
+    /* 调整浏览量的右侧间距 */
+
 }
 
-.news-list {
+.news-item {
     display: flex;
-    width: 100%;
-    height: 100%;
-    flex: 1;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgb(247, 248, 250);
+    margin-top: 7px;
+    margin-bottom: 7px;
+    margin-right: 20px;
 
-    overflow: auto;
+    width: 100%;
 }
 
 .chat-robot {
@@ -167,21 +182,29 @@
     overflow-y: auto;
 }
 
+.news-list {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    flex-direction: column;
+
+    overflow: auto;
+    align-items: center;
+
+
+}
+
 .hot-list,
 .history-list {
     margin-bottom: 5px;
+    align-items: center;
+
+
+    width: 80%;
 }
 
-.news-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    border-bottom: 1px solid rgb(247, 248, 250);
-    margin-top: 7px;
-    margin-bottom: 7px;
-    margin-right: 20px;
-}
+
 
 .model-tip {
     font-size: 11px;
@@ -284,12 +307,12 @@ export default {
             console.log(count)
             const website = this.selectedIcoName;// 替换为你的网站参数
 
-            this.$http.get(listURL+'/ListResource', {
+            this.$http.get(listURL + '/ListResource', {
                 params: {
                     website: website,
                     count: count,
-                    searchtxt:this.searchTxt,
-                    listtype:"news",
+                    searchtxt: this.searchTxt,
+                    listtype: "news",
                 }
             })
                 .then(response => {
@@ -306,7 +329,7 @@ export default {
                 });
         },
         setSearch(txt) {
-             
+
             this.searchTxt = txt;
             this.getNews(10, 'news');
             this.getNews(100, 'history');
