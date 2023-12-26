@@ -53,6 +53,14 @@
                       <div class="books-news-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
                       <!-- 浏览量 -->
                       <div class="books-news-views-count"> 浏览量：{{ item.count }} </div>
+
+
+                       <div class="books-news-views-count"> {{ item.img_url }} </div>
+                      <div class="books-news-views-count"> {{ item.content }} </div>
+                      <div class="books-news-views-count"> {{ item.author }} </div>
+                      <div class="books-news-views-count"> {{ item.type }} </div>
+                      <div class="books-news-views-count"> {{ item.state }} </div>
+                      <div class="books-news-views-count"> {{ item.updatetime }} </div>
                       <!-- 详细按钮 -->
                       <el-button class="detail-button" @click="selectItem(item)" type="primary" link> 分析<el-icon>
                               <ArrowRight />
