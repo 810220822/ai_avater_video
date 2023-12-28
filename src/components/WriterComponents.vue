@@ -20,7 +20,7 @@
                 <el-tab-pane label="新闻热点" name="新闻热点"></el-tab-pane>
                 <el-tab-pane label="爆款热卖" name="爆款热卖"></el-tab-pane>
                 <el-tab-pane label="爆剧剧本" name="爆剧剧本"></el-tab-pane>
-                <el-tab-pane label="草稿箱" name="草稿箱"></el-tab-pane>
+                <!-- <el-tab-pane label="草稿箱" name="草稿箱"></el-tab-pane> -->
             </el-tabs>
         </div>
         <div class="writer-components">
@@ -31,8 +31,7 @@
             <SellComponent v-show="activeName === '爆款热卖'" ref="sells"/>
             <!-- 爆剧剧本控件 -->
             <DramaComponent v-show="activeName === '爆剧剧本'" ref="books"/>
-            <!-- 草稿箱控件 -->
-            <BoxComponent v-show="activeName === '草稿箱'" ref="boxes"/>
+           
            
         </div>
         <div style="font-size: 55px;"></div>
@@ -134,7 +133,7 @@ import { ref } from 'vue';
 import NewsComponent from "./NewsComponent.vue";
 import SellComponent from "./SellComponent.vue";
 import DramaComponent from "./DramaComponent.vue";
-import BoxComponent from "./BoxComponent.vue";
+ 
 
 
 const inputtext = ref('');
@@ -155,8 +154,7 @@ export default {
                     return "SellComponent";
                 case "爆剧剧本":
                     return "DramaComponent";
-                case "草稿箱":
-                    return "BoxComponent";
+         
                 default:
                     return "";
             }
@@ -176,8 +174,7 @@ export default {
         Search,
         NewsComponent,
         SellComponent,
-        DramaComponent,
-        BoxComponent,
+        DramaComponent, 
     },
     data() {
         return {

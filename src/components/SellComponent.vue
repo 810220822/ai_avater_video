@@ -5,40 +5,26 @@
             <div class="writer-sell-icons">
                 <!-- writer-news-icons 高度30px，在顶部，固定不动，宽度100% -->
                 <!-- 一排icon按钮 -->
-                <div class="icon" v-for="icon in icons" :key="icon.id">
+                <div>
 
-                    <!-- icon 图标 -->
-                    <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large"
-                        :class="{ 'clicked': icon.id === selectedIcon }">
-
-                        <img :src="getIconPath(icon.iconUrl)" alt="icon" class="icon-image" @click="updateData(icon)">
-
-                        {{ icon.name }}
-                    </el-button>
-
+                    <WriterTopIcon v-for="icon in icons" :key="icon.id" :icon="icon" :selectedIcon="selectedIcon"
+                        :updateData="updateData" :getIconPath="getIconPath"></WriterTopIcon>
                 </div>
+
+                <!-- @click="updateData(icon)" bg="false"  -->
+
+
             </div>
             <div class="news-list" style="height: 100%;">
                 <div class="hot-list">
                     <div class="model-title">
                         热榜
                     </div>
-
-                    <div class="writer-sell-item" v-for="item in hotList" :key="item.id">
-                        <!-- 标题 -->
-                        <div class="writer-sell-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
-                        <!-- 浏览量 -->
-                        <div class="writer-sell-views-count">浏览量：{{ item.count }}</div>
-                        <!-- 详细按钮 -->
-                        <el-button class="sell-detail-button" @click="selectItem(item)" type="primary" link>
-                            分析<el-icon>
-                                <ArrowRight />
-                            </el-icon>
-
-                        </el-button>
-                        <!-- 进入按钮 -->
-
+                    <div>
+                        <SellItem v-for="item in hotList" :key="item.id" :item="item" @select-item="selectItem">
+                        </SellItem>
                     </div>
+
                     <div class="model-tip">
                         更新于：2023年12月20日 17:04:51
                     </div>
@@ -47,22 +33,11 @@
                     <div class="model-title">
                         近期热榜
                     </div>
-
-                    <div class="writer-sell-item" v-for="item in hotList" :key="item.id">
-                        <!-- 标题 -->
-                        <div class="writer-sell-title" @click="openLink(item.link)">{{ item.id }}.{{ item.title }}</div>
-                        <!-- 浏览量 -->
-                        <div class="writer-sell-views-count">浏览量：{{ item.count }}</div>
-                        <!-- 详细按钮 -->
-                        <el-button class="sell-detail-button" @click="selectItem(item)" type="primary" link>
-                            分析<el-icon>
-                                <ArrowRight />
-                            </el-icon>
-
-                        </el-button>
-                        <!-- 进入按钮 -->
-
+                    <div>
+                        <SellItem v-for="item in historyList" :key="item.id" :item="item" @select-item="selectItem">
+                        </SellItem>
                     </div>
+
                     <div class="model-tip">
                         只展示最新 100 条榜单历史
                     </div>
@@ -85,42 +60,6 @@
     </div>
 </template>
 <style>
-.icon-button {
-    /* 添加你想要的样式 */
-}
-
-.icon-button.clicked {
-    /* 添加你想要的被点击时的样式 */
-    background-color: #edf5fe;
-    border: 1px solid #dceafa;
-}
-
-
-.writer-sell-title {
-
-    display: flex;
-    /* flex-direction:flex-start; */
-    text-align: left;
-    color: #579ff8;
-    cursor: pointer;
-
-    font-size: 14px;
-    flex-grow: 1;
-    margin-left: 13px;
-    width: 70%;
-}
-
-.sell-detail-button {
-    width: 10%;
-}
-
-.writer-sell-views-count {
-    color: gray;
-    font-size: smaller;
-    text-align: left;
-    width: 20%;
-}
-
 .news-list {
     display: flex;
     width: 100%;
@@ -166,7 +105,7 @@
 }
 
 .scroll-list {
-    height: 70vh;
+
     overflow-y: auto;
 }
 
@@ -175,16 +114,7 @@
     margin-bottom: 5px;
 }
 
-.writer-sell-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    border-bottom: 1px solid rgb(247, 248, 250);
-    margin-top: 7px;
-    margin-bottom: 7px;
-    margin-right: 20px;
-}
+
 
 .model-tip {
     font-size: 11px;
@@ -214,31 +144,13 @@
     justify-content: center;
     width: 100%;
 }
-
-.icon {
-    width: 130px;
-    display: inline-block;
-}
-
-.icon-image {
-    width: 30px;
-    height: 30px;
-    margin-right: 7px;
-}
-
-.icon-button {
-    max-height: 180px;
-    width: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-}
 </style>
 <script>
 import { ArrowRight } from '@element-plus/icons-vue';
 import ChatComponent from "./ChatComponent.vue";
 import { listURL } from '@/utils/api.js';
+import SellItem from './template/SellItem.vue'
+import WriterTopIcon from './template/WriterTopIcon.vue'
 export default {
 
     mounted() {
@@ -287,12 +199,12 @@ export default {
             console.log(count)
             const website = this.selectedIcoName;// 替换为你的网站参数
 
-            this.$http.get(listURL+'/ListResource', {
+            this.$http.get(listURL + '/ListResource', {
                 params: {
                     website: website,
                     count: count,
-                    searchtxt:this.searchTxt,
-                    listtype:"malls",
+                    searchtxt: this.searchTxt,
+                    listtype: "malls",
                 }
             })
                 .then(response => {
@@ -309,7 +221,7 @@ export default {
                 });
         },
         setSearch(txt) {
-             
+
             this.searchTxt = txt;
             this.getNews(10, 'news');
             this.getNews(100, 'history');
@@ -317,7 +229,7 @@ export default {
     },
     components: {
 
-        ChatComponent
+        ChatComponent, SellItem, WriterTopIcon
     },
 
     data() {
@@ -328,7 +240,7 @@ export default {
                 { id: 1, iconUrl: 'taobao', name: '淘宝' },
                 { id: 2, iconUrl: 'jd', name: '京东' },
                 { id: 3, iconUrl: 'pinduoduo', name: '拼多多' },
-                { id: 4, iconUrl: 'douyinmall', name: '抖音商城' } 
+                { id: 4, iconUrl: 'douyinmall', name: '抖音商城' }
 
             ],
 

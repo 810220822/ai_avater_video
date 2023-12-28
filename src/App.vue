@@ -90,7 +90,7 @@
 import CommonAside from './components/CommonAside.vue';
 import Header from './components/Header.vue';
 import PageHeader from './components/PageHeader.vue';
-import Mainviews from './views/mainviews.vue';
+ 
 export default {
   data() {
     return {
@@ -119,7 +119,7 @@ export default {
 
   name: 'App',
   components: {
-    CommonAside, Header, PageHeader, Mainviews
+    CommonAside, Header, PageHeader
   }
 }
 </script>

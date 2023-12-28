@@ -5,17 +5,10 @@
             <div class="writer-news-icons">
                 <!-- writer-news-icons 高度30px，在顶部，固定不动，宽度100% -->
                 <!-- 一排icon按钮 -->
-                <div class="icon" v-for="icon in icons" :key="icon.id">
+                <div>
 
-                    <!-- icon 图标 -->
-                    <el-button class="icon-button" @click="updateData(icon)" bg="false" size="large"
-                        :class="{ 'clicked': icon.id === selectedIcon }">
-
-                        <img :src="getIconPath(icon.iconUrl)" alt="icon" class="icon-image" @click="updateData(icon)">
-
-                        {{ icon.name }}
-                    </el-button>
-
+                    <WriterTopIcon v-for="icon in icons" :key="icon.id" :icon="icon" :selectedIcon="selectedIcon"
+                        :updateData="updateData" :getIconPath="getIconPath"></WriterTopIcon>
                 </div>
             </div>
             <div class="news-list" style="height: 100%;">
@@ -90,15 +83,7 @@
     </div>
 </template>
 <style>
-.icon-button {
-    /* 添加你想要的样式 */
-}
-
-.icon-button.clicked {
-    /* 添加你想要的被点击时的样式 */
-    background-color: #edf5fe;
-    border: 1px solid #dceafa;
-}
+ 
 
 
 .news-title {
@@ -126,6 +111,7 @@
     color: gray;
     font-size: smaller;
     margin-right: 10px;
+    text-wrap: nowrap;
     /* 调整浏览量的右侧间距 */
 
 }
@@ -240,25 +226,13 @@
     display: inline-block;
 }
 
-.icon-image {
-    width: 30px;
-    height: 30px;
-    margin-right: 7px;
-}
-
-.icon-button {
-    max-height: 180px;
-    width: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    vertical-align: middle;
-}
+ 
 </style>
 <script>
 import { ArrowRight } from '@element-plus/icons-vue';
 import ChatComponent from "./ChatComponent.vue";
 import { listURL } from '@/utils/api.js';
+import WriterTopIcon from './template/WriterTopIcon.vue'
 export default {
 
     mounted() {
@@ -337,7 +311,7 @@ export default {
     },
     components: {
 
-        ChatComponent
+        ChatComponent, WriterTopIcon
     },
 
     data() {
