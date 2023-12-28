@@ -26,7 +26,7 @@
 .right-items {
   display: flex;
   align-items: center;
-  color: white;
+ 
 }
 .el-menu-demo {
 
@@ -57,6 +57,9 @@ export default {
         handleClose(key, keyPath) { console.log(key, keyPath); },
         clickMenu(path, special) {
             console.log(key, keyPath);
+        },
+        logout() {
+            console.log('退出登录');
         }
     },
     components: {

@@ -29,15 +29,13 @@ Page({
     }
   },
   bindBlur:function (e) {
-    console.log('e')
-    console.log(e)
+    
     this.setData({
       // inputValue: e.detail.value
     });
   },
   onInput: function (e) {
-    // console.log('a')
-    // console.log(e)
+   
     this.setData({
       inputValue: e.detail.value
     });
@@ -140,21 +138,20 @@ Page({
   // onChooseImage: function () {
   onSend: function () {
 
-    console.log('this')
+ 
     var that = this
    
     var inputValue = this.data.inputValue.trim();
-    // console.log('inputValue')
-    // console.log(inputValue)
+  
     if (inputValue === '') {
       return;
     }
     that.reFreshMessage('user', inputValue)
-    // console.log('reFreshMessage')
+     
     that.setWatingRorate(true)
-    // console.log('setWatingRorate')
+  
     that.chattingResponds()
-    // console.log('chattingResponds')
+     
 
 
   },

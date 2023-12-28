@@ -83,19 +83,7 @@
   width: 25%;
 }
 
-.writer-books-container {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-}
 
-.writer-books-list {
-  display: flex;
-  flex-direction: column;
-  width: 65%;
-}
 
 .scroll-list {
   height: 70vh;
@@ -126,7 +114,19 @@
 
 }
 
+.writer-books-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+}
 
+.writer-books-list {
+  display: flex;
+  flex-direction: column;
+  width: 65%;
+}
 
 .writer-books-icons {
   display: flex;

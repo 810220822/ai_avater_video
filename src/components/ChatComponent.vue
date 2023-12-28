@@ -99,7 +99,7 @@ export default {
     chattingResponds: function () {
 
       var url = backendURL + "/WriterChatting";
-      console.log(url);
+      
 
       this.$http({
         method: 'post',
@@ -113,9 +113,9 @@ export default {
       })
         .then(response => {
           var data = response.data.result;
-          console.log(response.data);
+         
           this.setWatingRorate(false)
-          console.log(data)
+        
 
           this.scrollMessagesToBottom();
           this.intervalResponds(data, 'assistant', false)

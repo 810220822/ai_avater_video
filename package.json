@@ -15,11 +15,13 @@
     "qs": "^6.11.2",
     "vue": "^3.2.13",
     "vue-axios": "3.5.2",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vue2-editor": "^2.10.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@types/vue2-editor": "^2.6.5",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
