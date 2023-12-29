@@ -14,8 +14,11 @@
                         <Picture />
                     </el-icon>AI作图</el-button>
                 <el-button class="tool-button" type="primary" text bg><el-icon>
+                        <Mic />
+                    </el-icon>播放台词</el-button>  
+                    <el-button class="tool-button" type="primary" text bg><el-icon>
                         <VideoPlay />
-                    </el-icon>播放台词</el-button>
+                    </el-icon>视频编辑</el-button>
                 <el-divider direction="vertical" />
             </div>
             <div>
@@ -34,6 +37,7 @@
 
         </div>
         <!-- 基本信息 basic-info-->
+        <span class="editor title">简介</span>
         <div class="editor-row abstract">
 
             <div class="basic-info row">
