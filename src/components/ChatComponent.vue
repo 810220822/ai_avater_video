@@ -100,7 +100,8 @@ export default {
 
       var url = backendURL + "/WriterChatting";
       
-
+      console.log(JSON.stringify({ result: this.messages })); 
+      console.log(JSON.stringify(this.messages));
       this.$http({
         method: 'post',
         url: url,
@@ -121,6 +122,7 @@ export default {
           this.intervalResponds(data, 'assistant', false)
         })
         .catch(error => {
+          console.error('error');
           console.error(error);
         }); 
     },

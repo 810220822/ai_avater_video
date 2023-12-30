@@ -1,6 +1,6 @@
 
 
 
-export const backendURL = 'http://localhost:9000';
+export const backendURL = 'http://101.201.79.180:5001';
 
-export const listURL = " http://127.0.0.1:5000";
+export const listURL = " http://101.201.79.180:5000";
