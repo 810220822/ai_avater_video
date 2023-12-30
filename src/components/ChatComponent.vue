@@ -122,7 +122,7 @@ export default {
           this.intervalResponds(data, 'assistant', false)
         })
         .catch(error => {
-          console.error('error');
+          console.error('erro1r');
           console.error(error);
         }); 
     },
