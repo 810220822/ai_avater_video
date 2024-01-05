@@ -630,7 +630,7 @@ export default {
         },
         onDeleteProgram(pro) {
 
-            this.$confirm('确定删除吗？', '确认删除', {
+            this.$confirm('确定删除吗？', '确认删除?', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
