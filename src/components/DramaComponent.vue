@@ -138,7 +138,7 @@
 </style>
 <script>
 import ChatComponent from "./ChatComponent.vue";
-import { listURL } from '@/utils/api.js';
+import { backendURL } from '@/utils/api.js';
 import BooksItem from './template/BooksItem.vue'
 import WriterTopIcon from './template/WriterTopIcon.vue'
 export default {
@@ -186,10 +186,10 @@ export default {
       // 清除聊天记录
     },
     getNews(count, type) {
-      console.log(count)
+     
       const website = this.selectedIcoName;// 替换为你的网站参数
 
-      this.$http.get(listURL + '/ListResource', {
+      this.$http.get(backendURL + '/WriterListResource', {
         params: {
           website: website,
           count: count,
@@ -198,7 +198,7 @@ export default {
         }
       })
         .then(response => {
-          console.log(response.data);
+         
           if (type === 'news') {
             this.hotList = response.data;
           } else if (type === 'history') {

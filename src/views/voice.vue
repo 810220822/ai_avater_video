@@ -1,23 +1,61 @@
 <template>
-    <el-input class="red-text" v-model="inputValue" placeholder="请输入内容"></el-input>
-  </template>
-  
-  <style scoped>
-  .red-text .el-input__inner {
-    color: red;
-  }
-  </style>
-  <script>
-  export default {
-    data() {
-      return {
-        inputValue: ''
-      }
+  <el-form ref="formRef" :model="dynamicValidateForm"   class="demo-dynamic">
+    <el-form-item prop="email" label="标题" :rules="[
+        {
+          required: true,
+          message: '标题为必填项',
+          trigger: 'blur',
+        },
+       
+      ]">
+      <el-input v-model="dynamicValidateForm.email" />
+    </el-form-item>
+    <el-form-item prop="email" label="内容" :rules="[
+        {
+          required: true,
+          message: '内容为必填项',
+          trigger: 'blur',
+        },
+       
+      ]">
+      <el-input v-model="dynamicValidateForm.email" />
+    </el-form-item>
+ 
+  </el-form>
+</template>
+
+<script  setup>
+ 
+// import type { FormInstance } from 'element-plus'
+import { reactive, ref } from 'vue'
+
+const formRef = ref()
+const dynamicValidateForm = reactive({
+  domains: [
+    {
+      key: 1,
+      value: '',
     },
-    methods: {
-      onInput: function (e) {
-        this.inputValue = e.detail.value
-      }
+  ],
+  email: '',
+})
+
+ 
+
+const submitForm = (formEl) => {
+  if (!formEl) return
+  formEl.validate((valid) => {
+    if (valid) {
+      console.log('submit!')
+    } else {
+      console.log('error submit!')
+      return false
     }
-  }
-  </script>
+  })
+}
+
+const resetForm = (formEl) => {
+  if (!formEl) return
+  formEl.resetFields()
+}
+</script>

@@ -36,7 +36,7 @@
 <script>
 
 import {  ElButton, ElInput } from 'element-plus';
-import { listURL,backendURL } from '@/utils/api.js';
+import { backendURL} from '@/utils/api.js';
 
 
 

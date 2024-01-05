@@ -148,7 +148,7 @@
 <script>
 import { ArrowRight } from '@element-plus/icons-vue';
 import ChatComponent from "./ChatComponent.vue";
-import { listURL } from '@/utils/api.js';
+import { backendURL } from '@/utils/api.js';
 import SellItem from './template/SellItem.vue'
 import WriterTopIcon from './template/WriterTopIcon.vue'
 export default {
@@ -199,7 +199,7 @@ export default {
             console.log(count)
             const website = this.selectedIcoName;// 替换为你的网站参数
 
-            this.$http.get(listURL + '/ListResource', {
+            this.$http.get(backendURL + '/WriterListResource', {
                 params: {
                     website: website,
                     count: count,
